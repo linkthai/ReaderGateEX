@@ -1,0 +1,32 @@
+#navbar {
+  width: 100%;
+  min-height: 100px;
+  background-color: white;
+  padding: 0px;
+  margin: 0px;
+}
+#logo {
+  width: 60px;
+  height: auto;
+  margin: 10px;
+}
+#logo-button {
+  width: 300px;
+  font-size: 30px;
+  vertical-align: middle;
+  color: #9B9B9B;
+  padding: 10px;
+}
+.menu-button {
+  height: 100%;
+  margin:auto;
+  padding: 35px 20px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 17px;
+  color: #4F4F4F;
+  border-radius: 0px;
+}
+#search-box {
+  margin-top: 40px;
+}

@@ -1,0 +1,28 @@
+<md-toolbar id="navbar" layout-gt-sm="row" layout="column" layout-align="space-around stretch">
+
+  <div layout="row" flex-gt-sm=60 flex=100 layout-align="center center">
+
+    <md-button href="#/" id="logo-button" flex-xs=20 layout="row" layout-align="start center">
+      <img id="logo" src="assets/images/readergate.png" />
+      <span hide-xs>ReaderGate</span>
+    </md-button>
+
+    <div layout="row" flex-gt-xs=50 flex-xs layout-align="center center">
+      <md-button class="menu-button" href="#/">Home</md-button>
+      <md-button class="menu-button" href="#archive">Archive</md-button>
+      <md-button class="menu-button" href="#contact">Contact</md-button>
+    </div>
+  </div>
+  <md-divider hide-gt-xs class="bg-cyan"></md-divider>
+  <div layout="row" flex-gt-sm=40 flex=100 layout-align="space-around center">
+    <md-input-container flex=30 id="search-box" md-no-float md-padding>
+      <input class="grey" ng-model="user.phone" type="text" placeholder="Search">
+      <md-icon><i class="cyan material-icons md-24">search</i>
+    </md-input-container>
+
+    <div layout="row">
+      <md-button class="menu-button" href="#login">Login</md-button>
+      <md-button class="menu-button" href="#register">Register</md-button>
+    </div>
+  </div>
+</md-toolbar>
