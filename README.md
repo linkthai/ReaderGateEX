@@ -1,10 +1,10 @@
--Clone project
--Open cmd
--Check if npm and bower is globally installed:
-    + npm -v
-    + bower -v
--Then install the package with npm and bower:
-    + npm install
-    + bower install
--Then use gulp to run:
-    +gulp serve
+-Clone project<br>
+-Open cmd <br>
+-Check if npm and bower is globally installed: <br>
+    + npm -v <br>
+    + bower -v <br>
+-Then install the package with npm and bower: <br>
+    + npm install <br>
+    + bower install <br>
+-Then use gulp to run: <br>
+    +gulp serve <br>
