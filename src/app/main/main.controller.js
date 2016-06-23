@@ -6,34 +6,59 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, webDevTec, toastr) {
+  function MainController(toastr) {
     var vm = this;
 
-    vm.awesomeThings = [];
+    vm.text = '';
+    vm.title = '';
+    vm.selectItem = selectItem;
     vm.classAnimation = '';
-    vm.creationDate = 1466450796220;
     vm.showToastr = showToastr;
 
-    activate();
-
-    function activate() {
-      getWebDevTec();
-      $timeout(function() {
-        vm.classAnimation = 'rubberBand';
-      }, 4000);
-    }
-
-    function showToastr() {
-      toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
+    function showToastr(text) {
+      toastr.info(text);
       vm.classAnimation = '';
     }
 
-    function getWebDevTec() {
-      vm.awesomeThings = webDevTec.getTec();
+    function toggleItemsList() {
+      var pending = $mdBottomSheet.hide() || $q.when(true);
 
-      angular.forEach(vm.awesomeThings, function(awesomeThing) {
-        awesomeThing.rank = Math.random();
+      pending.then(function() {
+        $mdSidenav('left').toggle();
       });
     }
+
+    function selectItem(item) {
+      vm.title = item.name;
+      //vm.toggleItemsList();
+    }
+
+    vm.menuItems = [{
+      name: 'NEW RELEASE',
+      icon: 'new_releases',
+      sref: '.new'
+    }, {
+      name: 'MOST POPULAR',
+      icon: 'grade',
+      sref: '.popular'
+    }];
+
+    vm.latestUpdate = [{
+      name: 'Naruto',
+      vol: 10,
+      chap: 20
+    }, {
+      name: 'DragonBall',
+      vol: 32,
+      chap: 49
+    }, {
+      name: 'One Piece',
+      vol: 98,
+      chap: 24
+    }, {
+      name: 'Detective Conan',
+      vol: 20,
+      chap: 13
+    }];
   }
 })();

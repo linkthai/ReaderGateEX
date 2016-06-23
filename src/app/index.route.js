@@ -10,27 +10,37 @@
       .when('/', {
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
-        controllerAs: 'main'
+        controllerAs: 'vm'
       })
       .when('/archive', {
         templateUrl: 'app/archive/archive.html',
         controller: 'ArchiveController',
-        controllerAs: 'main'
+        controllerAs: 'vm'
+      })
+      .when('/archive/:param1', {
+        templateUrl: 'app/title/title.html',
+        controller: 'TitleController',
+        controllerAs: 'vm'
+      })
+      .when('/archive/:param1/:param2', {
+        templateUrl: 'app/title/title.html',
+        controller: 'TitleController',
+        controllerAs: 'vm'
       })
       .when('/contact', {
         templateUrl: 'app/contact/contact.html',
         controller: 'ContactController',
-        controllerAs: 'main'
+        controllerAs: 'vm'
       })
       .when('/login', {
         templateUrl: 'app/login/login.html',
         controller: 'LoginController',
-        controllerAs: 'main'
+        controllerAs: 'vm'
       })
       .when('/register', {
         templateUrl: 'app/register/register.html',
         controller: 'RegisterController',
-        controllerAs: 'main'
+        controllerAs: 'vm'
       })
       .otherwise({
         redirectTo: '/'

@@ -4,6 +4,7 @@
   background-color: white;
   padding: 0px;
   margin: 0px;
+  border-bottom: 10px solid var(--primary-color);
 }
 #logo {
   width: 60px;
@@ -11,7 +12,7 @@
   margin: 10px;
 }
 #logo-button {
-  width: 300px;
+  width: 280px;
   font-size: 30px;
   vertical-align: middle;
   color: #9B9B9B;

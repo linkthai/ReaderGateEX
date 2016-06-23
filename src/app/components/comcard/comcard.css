@@ -1,0 +1,36 @@
+@keyframes outline {
+  0% {
+    box-shadow: 0 0 1px #212121;
+  }
+  20% {
+    box-shadow: 0 0 5px #0097A7;
+  }
+  100% {
+    box-shadow: 0 0 15px #26C6DA;
+  }
+}
+.comcard-image {
+  width: 100%;
+  height: 100%;
+}
+.comcard {
+  height: auto;
+  outline: transparent solid 5px;
+  margin-top: 20px;
+}
+.comcard:hover {
+  box-shadow: 0 0 15px #26C6DA;
+  animation: outline 1s;
+}
+.card-title-text {
+  font-size: 25px;
+  padding: 15px;
+}
+.card-info {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.card-click-area {
+  cursor: pointer;
+  cursor: hand;
+}

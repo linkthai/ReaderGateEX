@@ -1,12 +1,44 @@
 <div layout="vertical" layout-fill>
 
-  <md-content flex>
+  <md-content flex class=body>
     <header>
       <nav-bar md-whiteframe-z2></nav-bar>
     </header>
 
-    <div class="bg-grey body">Archive
-    </div>
+    <md-content class="mid-content" data-ng-controller="ArchiveController as vm">
+      <div class="main-content" layout="column" layout-align="space-around stretch">
+        <div class="sort-bar" layout="column" layout-gt-sm="row" layout-align="center center">
+          <button class="sort-button" flex=100 flex-gt-sm data-ng-click="vm.changeType($index)" data-ng-class="{'sort-button-on': vm.selectedSortIndex === $index}" flex data-ng-repeat="item in vm.sortType">
+            {{ item.type }}
+          </button>
+        </div>
+
+        <div layout="column" ng-hide="vm.selectedSortIndex != 0">
+          <md-content flex-gt-sm=80 class="alphabet-container" layout-align="center center">
+            <button class="alphabet-button" ng-repeat="char in vm.alphabet" ng-click="vm.changeAlphabet(char)" ng-class="{'alphabet-button-active': vm.selectedAlphabet === char}">
+              {{ char }}
+            </button>
+          </md-content>
+          <md-divider class="mid-content bg-cyan"></md-divider>
+
+          <md-content class="mid-content table-header" layout="row"
+          layout="start center">
+            <div flex=60 flex-xs=100 flex-sm=100>Title</div>
+            <div flex=20 hide-xs hide-sm>Author</div>
+            <div flex=20 hide-xs hide-sm>Status</div>
+          </md-content>
+          <md-content class="mid-content table-wrapper" layout="column" layout="stretch center" >
+            <div class="table-list bottom-border-animation" ng-repeat="item in vm.comicList | orderBy:'title' | filter: vm.filterAlphabet" layout="row"
+            layout="start center" ng-click="vm.go(item.href)">
+              <div flex=60 flex-xs=100 flex-sm=100>{{item.title}}</div>
+              <div flex=20 hide-xs hide-sm>{{item.author}}</div>
+              <div flex=20 hide-xs hide-sm>{{item.status}}</div>
+            </div>
+          </md-content>
+
+        </div>
+      </div>
+    </md-content>
   </md-content>
 
 </div>
