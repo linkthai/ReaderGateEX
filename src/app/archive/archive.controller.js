@@ -6,13 +6,8 @@
     .controller('ArchiveController', ArchiveController);
 
   /** @ngInject */
-  function ArchiveController(toastr, $location) {
+  function ArchiveController($location) {
     var vm = this;
-
-    function showToastr(text) {
-      toastr.info(text);
-      vm.classAnimation = '';
-    }
 
     vm.selectedSortIndex = 0;
     vm.sortType = [{

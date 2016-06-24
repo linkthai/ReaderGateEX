@@ -6,31 +6,21 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController(toastr) {
+  function MainController() {
     var vm = this;
 
     vm.text = '';
     vm.title = '';
     vm.selectItem = selectItem;
     vm.classAnimation = '';
-    vm.showToastr = showToastr;
 
-    function showToastr(text) {
-      toastr.info(text);
-      vm.classAnimation = '';
-    }
-
-    function toggleItemsList() {
-      var pending = $mdBottomSheet.hide() || $q.when(true);
-
-      pending.then(function() {
-        $mdSidenav('left').toggle();
-      });
-    }
+    // function showToastr(text) {
+    //   toastr.info(text);
+    //   vm.classAnimation = '';
+    // }
 
     function selectItem(item) {
       vm.title = item.name;
-      //vm.toggleItemsList();
     }
 
     vm.menuItems = [{

@@ -1,0 +1,37 @@
+<div layout="vertical" layout-fill>
+
+  <md-content flex class=body>
+    <header>
+      <nav-bar md-whiteframe-z2></nav-bar>
+    </header>
+
+    <md-content class="mid-content" data-ng-controller="TitleController as vm">
+      <div class="main-content">
+        <div class="length" layout="column" layout-align="space-between center">
+          <div class="chapter-navbar" layout="row" layout-align="space-around center">
+            <div class="chapter-icon previous-icon"></div>
+            <select ng-change="vm.changeVol()" ng-model="vm.selectedChapter" class="chapter-select"
+            ng-options="item as ('Volume ' + item.vol + ' - Chapter ' + item.chap + ' - ' + item.name) for item in vm.chapList">
+            </select>
+            <div class="chapter-icon next-icon"></div>
+          </div>
+
+          <div flex=80 class="chapter-pages">
+            <div flex=100 ng-repeat="page in vm.chapPages">
+              <img class="chapter-page" src="{{page.url}}"/>
+            </div>
+          </div>
+
+          <div class="chapter-navbar" layout="row" layout-align="space-around center">
+            <div class="chapter-icon previous-icon"></div>
+            <select ng-change="vm.changeVol()" ng-model="vm.selectedChapter" class="chapter-select"
+            ng-options="item as ('Volume ' + item.vol + ' - Chapter ' + item.chap + ' - ' + item.name) for item in vm.chapList">
+            </select>
+            <div class="chapter-icon next-icon"></div>
+          </div>
+        </div>
+      </div>
+    </md-content>
+  </md-content>
+
+</div>

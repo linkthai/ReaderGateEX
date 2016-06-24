@@ -22,8 +22,8 @@
         controller: 'TitleController',
         controllerAs: 'vm'
       })
-      .when('/archive/:param1/:param2', {
-        templateUrl: 'app/title/title.html',
+      .when('/archive/:param1/:param2/:param3', {
+        templateUrl: 'app/chapter/chapter.html',
         controller: 'TitleController',
         controllerAs: 'vm'
       })
@@ -42,9 +42,9 @@
         controller: 'RegisterController',
         controllerAs: 'vm'
       })
-      .otherwise({
-        redirectTo: '/'
-      });
+      // .otherwise({
+      //   redirectTo: '/'
+      // });
   }
 
 })();
