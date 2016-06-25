@@ -5,7 +5,15 @@
       <nav-bar md-whiteframe-z2></nav-bar>
     </header>
 
-    <div class="bg-grey body">CONTACT
+    <div class="bg-grey body">
+      <div class="mdl-card__supporting-text mdl-color-text--grey-600" id="messagesDiv">
+        <p id="test">Select a file below. When it is uploaded, a link will be displayed to the uploaded file.</p>
+        <h6>Choose File</h6>
+        <input type="file" id="file" name="file"/>
+        <button ng-click="upload()">Upload</button>
+        <h6>File URL:</h6>
+        <span id="linkbox"></span>
+      </div>
     </div>
   </md-content>
 
