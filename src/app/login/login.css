@@ -1,0 +1,71 @@
+.body
+{
+  background: #F8F8FF;
+}
+
+.body h1
+{
+  text-align: center;
+  font-size: 20px;
+  margin-top: 30px;
+}
+.signin
+{
+  width: 26%;
+  margin: auto;
+  background: #ffffff;
+  border: 1px solid #CCCCCC;
+  -webkit-border-radius: 5px;
+  
+}
+
+.signin p
+{
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.signin input
+{
+  margin-left: 20px;
+  height: 25px;
+  width: 300px;
+}
+
+#btnSignin
+{
+   margin-left: 20px;
+   margin-bottom: 20px;
+  height: 30px;
+  width: 300px;
+  background: #4169E1;
+    border: 0px solid #4169E1;
+}
+
+#forgot-password
+{
+  color: #4169E1;
+  font-size: 12px;
+}
+
+#Facebook
+{
+  color: #ffffff;
+  background: #4169E1;
+  width: 30px;
+  height: 30px;
+  -webkit-border-radius: 5px;
+  border: 0px solid #4169E1;
+  font-size: 20px;
+}
+
+#Google
+{
+  color: #ffffff;
+  background: #FF3030;
+  width: 30px;
+  height: 30px;
+  -webkit-border-radius: 5px;
+	border: 0px solid #FF3030;
+  font-size: 20px;
+}
