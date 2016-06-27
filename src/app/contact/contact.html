@@ -6,10 +6,25 @@
     </header>
 
     <div class="bg-grey body">
+      <p>Create Series</p>
+      <p>Genres: </p>
+      <input type="text" ng-model="_genres" />
+      <p>Author: </p>
+      <input type="text" ng-model="_author" />
+      <p>Status: </p>
+      <input type="text" ng-model="_status" />
+      <p>Description: </p>
+      <input type="text" ng-model="_description" />
+      <p>Views: </p>
+      <input type="text" ng-model="_views" />
       <p>Book: </p>
-      <input type="text" ng-model="book" />
+      <input type="text" ng-model="_book" />
+      <button ng-click="createSeries()">Create</button>
+      <button ng-click="createSeries()">Update</button>
       <p>Chapter: </p>
-      <input type="text" ng-model="chapter" />
+      <input type="text" ng-model="_chapter" />
+      <p>Chapter name: </p>
+      <input type="text" ng-model="_chapterName" />
       <br>
       <br>
       <input type="file" ng-file-model="files" multiple />
@@ -19,6 +34,20 @@
         {{file.name}}
       </p>
 
+      <button type="button" ng-click="getAllSeries()">Get series</button>
+      <p ng-repeat="info in seriesInfo">
+        {{info._name}}
+      </p>
+
+      <button type="button" ng-click="getChaptersBySeries('Deadnote')">Get chapters</button>
+      <p ng-repeat="info in chaptersInfo">
+        {{info._chapterId}}
+      </p>
+
+      <button type="button" ng-click="getPagesByChapter('Deadnote', 'C1')">Get pages</button>
+      <p ng-repeat="page in pages">
+        <img src= {{page}} height="1400">
+      </p>
     </div>
 
   </md-content>
