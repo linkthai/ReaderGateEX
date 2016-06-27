@@ -3,36 +3,35 @@
   <md-content flex>
     <header>
       <nav-bar md-whiteframe-z2></nav-bar>
-	  <link href='https://cdn.rawgit.com/angular/bower-material/v0.10.0/angular-material.css' rel='stylesheet' type='text/css'>
     </header>
 
-    <div class="bg-grey body">
-		<div class="body">
-			<h1> Sign in</h1>
-			<div class="signin">
-				<p> Username or Email address </p>
-				<input></input>
-				<div layout="row">
-					<div flex> <p> Password </p></div>
-					<div flex id="forgot-password"> <p> Fogot password? </p></div>
-				</div>
-				<input type="password"> </input>
-				<p></p>
-				<button id="btnSignin"> Sign in</button>
-				<div layout="row">
-					<div flex ="40"><p> Sign in with </p></div>
-					<div flex ="10"><p><button id="Facebook">f</button></div>
-					<div flex ="10"><p><button id="Google">g+</button></div>
-				</div>  
-				<p style="text-align: center; color: #4169E1;"> Create an account </p>
-			</div>
-		</div>
-    </div>
+    <md-content class="mid-content" data-ng-controller="LoginController as vm">
+      <div class="main-content">
+        <div class="length" layout-align="space-between center">
+            <form flex=100 layout="column" name="myform" ng-submit="register()" layout-align="space-between center" novalidate>
+
+              <div class="margin-center">
+                <h1 class="cyan">Login</h1>
+                <p class="red margin center-text" ng-show="vm.message">{{vm.message}}</p>
+              </div>
+
+              <fieldset flex class="form-container" layout="column" layout-align="space-between center">
+
+                <input class="form-input" type="email" name="email" placeholder="Email" ng-model="vm.email" ng-required="true">
+
+                <input class="form-input" type="password" name="password" placeholder="Password" ng-model="vm.password" ng-required="true">
+
+              </fieldset>
+
+              <button class="button-submit" ng-click="vm.handleLogin()">Login</button>
+              <span class="link-text"><a ng-href="#/register">Don't have an account? Register here!</a></span>
+
+
+            </form>
+
+        </div>
+      </div>
+    </md-content>
   </md-content>
 
 </div>
-
-
-
-
-

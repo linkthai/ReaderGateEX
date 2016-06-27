@@ -1,12 +1,46 @@
 <div layout="vertical" layout-fill>
 
-  <md-content flex>
+  <md-content flex class="body">
     <header>
       <nav-bar md-whiteframe-z2></nav-bar>
     </header>
 
-    <div class="bg-grey body">REGISTER
-    </div>
+    <md-content class="mid-content" data-ng-controller="RegisterController as vm">
+      <div class="main-content">
+        <div class="length" layout-align="space-between center">
+            <form flex=100 layout="column" name="myform" ng-submit="register()" layout-align="space-between center" novalidate>
+
+              <div>
+                <h1 class="cyan">Register</h1>
+                <p>To access site features</p>
+                <p class="errorvalidation" ng-show="vm.message">{{vm.message}}</p>
+              </div>
+
+              <fieldset flex class="form-container" layout="column" layout-align="space-between center">
+                <!-- <input class="form-input" type="text" name="firstname" placeholder="First Name" ng-model="vm.firstname" ng-required="true">
+                <p class="errorvalidation" ng-show="myform.firstname.$invalid && myform.firstname.$touched">First name required.</p>
+
+                <input class="form-input" type="text" name="lastname" placeholder="Last Name" ng-model="vm.lastname" ng-required="true">
+                <p class="errorvalidation" ng-show="myform.lastname.$invalid && myform.lastname.$touched">Last name required.</p> -->
+
+
+                <input class="form-input" type="email" name="email" placeholder="Email" ng-model="vm.email" ng-required="true">
+                <p class="errorvalidation" ng-show="myform.email.$invalid && myform.email.$touched">Must be a valid email address.</p>
+
+                <input class="form-input" type="password" name="password" placeholder="Password" ng-model="vm.password" ng-required="true">
+                <p class="errorvalidation" ng-show="myform.password.$invalid && myform.password.$touched">Password is required.</p>
+
+              </fieldset>
+
+              <button type="submit" class="button-submit" ng-click="vm.handleSignUp()">Register</button>
+              <span class="link-text"><a ng-href="#/login">Already have an account? Login here</a></span>
+
+
+            </form>
+
+        </div>
+      </div>
+    </md-content>
   </md-content>
 
 </div>

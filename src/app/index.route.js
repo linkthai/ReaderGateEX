@@ -42,6 +42,11 @@
         controller: 'RegisterController',
         controllerAs: 'vm'
       })
+      .when('/register-success', {
+        templateUrl: 'app/register/register-success.html',
+        controller: 'RegisterController',
+        controllerAs: 'vm'
+      });
       // .otherwise({
       //   redirectTo: '/'
       // });
