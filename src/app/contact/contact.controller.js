@@ -130,7 +130,7 @@
         "_views": _views
       }
 
-      database.ref('series/' + book).set(postData);
+      database.ref('series/' + _book).set(postData);
     }
 
     $scope.getAllSeries = function() {
