@@ -45,6 +45,10 @@
       $location.path('/archive/' + path);
     };
 
+    vm.addSeries = function(path) {
+      $location.path('/add-new-series');
+    };
+
     vm.comicList = [{
       title: 'Conans',
       author: 'sdasd',

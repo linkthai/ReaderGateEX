@@ -26,16 +26,28 @@
                 </md-content>
               </md-card-content>
             </md-card>
+
+            <div layout="row" layout-align="start center">
+              <button ng-click="vm.editSeries()" ng-mouseenter="options1=true" ng-mouseleave="options1=false" class="admin-button">
+                <md-icon class="search-button icon-aligned" ng-show="options1"><i class="white material-icons md-12">edit</i></md-icon>
+                Edit series info
+              </button>
+              <button ng-click="vm.addChapter()" ng-mouseenter="options2=true" ng-mouseleave="options2=false" class="admin-button">
+                <md-icon class="search-button icon-aligned" ng-show="options2"><i class="white material-icons md-12">add</i></md-icon>
+                Add new chapter
+              </button>
+            </div>
+
             <md-card class="volume-list" layout="column">
               <md-card-header class="md-padding volume-list-header">
                 Volumes
               </md-card-header>
               <md-content class="table-wrapper">
-              <div class="volume-item" ng-repeat-start="item in vm.chapList" ng-click="vm.go(item.vol, item.chap)">
-                Volume {{ item.vol }} - Chapter {{ item.chap }} - {{ item.name }}
-              </div>
-              <md-divider ng-repeat-end></md-divider>
-            </md-content>
+                <div class="volume-item" ng-repeat-start="item in vm.chapList" ng-click="vm.go(item.vol, item.chap)">
+                  Volume {{ item.vol }} - Chapter {{ item.chap }} - {{ item.name }}
+                </div>
+                <md-divider ng-repeat-end></md-divider>
+              </md-content>
             </md-card>
           </div>
           <md-card class="right-bar" flex-gt-sm=30 flex=100>

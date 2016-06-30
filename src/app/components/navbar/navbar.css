@@ -1,33 +1,79 @@
 #navbar {
   width: 100%;
-  min-height: 100px;
+  height: 60px;
+  min-height: 60px;
   background-color: white;
   padding: 0px;
   margin: 0px;
-  border-bottom: 10px solid var(--primary-color);
+  box-shadow: 0 4px 2px -2px lightgrey;
 }
 #logo {
-  width: 60px;
+  width: 35px;
   height: auto;
-  margin: 10px;
+  margin-right: 5px;
 }
 #logo-button {
-  width: 280px;
-  font-size: 30px;
-  vertical-align: middle;
+  min-width: 80px;
+  font-size: 22px;
   color: #9B9B9B;
   padding: 10px;
+  cursor: pointer;
+  cursor: hand;
+  outline: none;
+}
+#logo-button:hover {
+}
+.menu-bar {
+  height: 60px;
+}
+@keyframes menu-button-animation {
+  0% {
+    background-color: transparent;
+  }
+  40% {
+    background-color: #80DEEA;
+  }
+  100% {
+    background-color: #4DD0E1;
+  }
+
 }
 .menu-button {
-  height: 100%;
-  margin:auto;
-  padding: 35px 20px;
+  height: inherit;
+  margin:5px;
+  padding: 10px;
   font-style: normal;
   font-weight: normal;
-  font-size: 17px;
-  color: #4F4F4F;
+  font-size: 15px;
+  color: #757575;
   border-radius: 0px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+.menu-button:hover {
+  background-color: #4DD0E1;
+  color: white;
+  animation: menu-button-animation 1s;
 }
 #search-box {
-  margin-top: 40px;
+  height: 35px;
+  font-size: 18px;
+}
+.search-button {
+  cursor: pointer;
+  cursor: hand;
+}
+.display-name {
+  height: inherit;
+  background-color: transparent;
+  color: #E57373;
+  border: none;
+  font-size: 15px;
+  text-align: center;
+  margin: 10px;
+  outline: none;
+}
+.display-name:hover {
+  color: #EF9A9A;
 }

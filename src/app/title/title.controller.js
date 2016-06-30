@@ -6,7 +6,7 @@
     .controller('TitleController', TitleController);
 
   /** @ngInject */
-  function TitleController($location, $routeParams) {
+  function TitleController($location, $routeParams, $window) {
     var vm = this;
     vm.titleId = $routeParams.param1;
     vm.vol = $routeParams.param2;
@@ -20,6 +20,15 @@
 
     vm.changeVol = function() {
       vm.go(vm.selectedChapter.vol, vm.selectedChapter.chap);
+    }
+
+    vm.editSeries = function() {
+      $location.path('/edit-series/' + vm.titleId);
+      //$window.location.reload();
+    }
+
+    vm.addChapter = function() {
+      $location.path('/add-chapter/' + vm.titleId);
     }
 
     vm.title = 'Death Note';

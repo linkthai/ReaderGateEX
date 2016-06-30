@@ -5,8 +5,14 @@
       <nav-bar md-whiteframe-z2></nav-bar>
     </header>
 
-    <md-content class="mid-content" data-ng-controller="ArchiveController as vm">
+    <md-content class="mid-content length" data-ng-controller="ArchiveController as vm">
       <div class="main-content" layout="column" layout-align="space-around stretch">
+
+        <button ng-click="vm.addSeries()" ng-mouseenter="options=true" ng-mouseleave="options=false" class="admin-button">
+          <md-icon class="search-button icon-aligned" ng-show="options"><i class="white material-icons md-12">add</i></md-icon>
+          Add new series
+        </button>
+
         <div class="sort-bar" layout="column" layout-gt-sm="row" layout-align="center center">
           <button class="sort-button" flex=100 flex-gt-sm data-ng-click="vm.changeType($index)" data-ng-class="{'sort-button-on': vm.selectedSortIndex === $index}" flex data-ng-repeat="item in vm.sortType">
             {{ item.type }}

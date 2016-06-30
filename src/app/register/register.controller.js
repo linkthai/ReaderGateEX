@@ -6,49 +6,70 @@
     .controller('RegisterController', RegisterController);
 
   /** @ngInject */
-  function RegisterController($scope, $location) {
+  function RegisterController($scope, $location, $window) {
 
     var vm = this;
     vm.firstname = '';
     vm.lastname = '';
     vm.email = '';
     vm.password = '';
-    var user = firebase.auth().currentUser;
+    vm.uid = '';
+    var auth = firebase.auth();
+    var database = firebase.database();
+    var newUser;
 
-    if (user) {
-      // User is signed in.
-      $location.path('/');
-    }
-
-    vm.handleSignUp = function () {
+    vm.handleSignUp = function() {
       if (vm.email.length < 4) {
-        alert('Please enter a valid email address.');
+        vm.message = 'Please enter a valid email address.';
         return;
       }
       if (vm.password.length < 4) {
-        alert('Please enter a password that is longer than 4 characters.');
+        vm.message = 'Please enter a password that is longer than 4 characters.';
         return;
       }
       // Sign in with email and pass.
       // [START createwithemail]
-      vm.result = firebase.auth().createUserWithEmailAndPassword(vm.email, vm.password)
-      .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // [START_EXCLUDE]
-        if (errorCode == 'auth/weak-password') {
-          alert('The password is too weak.');
-        } else if (errorCode == 'auth/email-already-in-use') {
-          alert('Email has already been used.');
-        } else {
-          console.error(error);
-        }
-        // [END_EXCLUDE]
-      })
-      .then(function() {
-        $location.path('/register-success');
-      });
+      firebase.auth().createUserWithEmailAndPassword(vm.email, vm.password)
+        .then(function() {
+
+          $location.path('/register-success');
+          $scope.$apply();
+
+          firebase.auth().signInWithEmailAndPassword(vm.email, vm.password)
+            .then(function() {
+              newUser = firebase.auth().currentUser;
+              newUser.updateProfile({
+                displayName: vm.firstname
+              });
+              vm.uid = newUser.uid;
+
+              var postData = {
+                "firstName": vm.firstname,
+                "lastName": vm.lastname
+              };
+
+              database.ref('users/' + vm.uid).set(postData);
+            });
+
+            $window.setTimeout(function(){ $window.location = '/'; }, 3000);
+            $scope.$apply();
+        }).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // [START_EXCLUDE]
+          if (errorCode == 'auth/weak-password') {
+            vm.message = 'The password is too weak.';
+          } else if (errorCode == 'auth/email-already-in-use') {
+            vm.message = 'Email has already been used.';
+          } else if (errorCode == 'auth/invalid-email') {
+            vm.message = 'The email is invalid.';
+          } else {
+            vm.message = errorMessage;
+          }
+          $scope.$apply();
+          // [END_EXCLUDE]
+        });
       // [END createwithemail]
     }
 

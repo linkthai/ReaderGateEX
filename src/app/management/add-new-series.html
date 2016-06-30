@@ -1,0 +1,47 @@
+<div layout="vertical" layout-fill>
+
+  <md-content flex class="body">
+    <header>
+      <nav-bar md-whiteframe-z2></nav-bar>
+    </header>
+
+    <md-content class="mid-content" data-ng-controller="ManagementController as vm">
+      <div class="main-content">
+        <div class="length max-width" layout-align="space-between center">
+
+          <h1 class="cyan">Add new series</h1>
+          <md-divider class="bg-cyan max-width"></md-divider>
+
+          <section layout="column" layout-align="space-around stretch">
+            <div class="manage-line" layout="row" layout-align="start center">
+              <p flex=15 class="manage-text">Title</p>
+              <input class="manage-input" type="text" />
+            </div>
+            <div class="manage-line" layout="row" layout-align="start center">
+              <p flex=15 class="manage-text">Author</p>
+              <input class="manage-input" type="text" />
+            </div>
+            <div class="manage-line" layout="row" layout-align="start center">
+              <p flex=15 class="manage-text">Genres</p>
+              <input class="manage-input" type="text" />
+            </div>
+            <div class="manage-line" layout="row" layout-align="start center">
+              <p flex=15 class="manage-text">Description</p>
+              <textarea class="manage-input-area" type="text" rows="10" cols="50"></textarea>
+            </div>
+            <div class="manage-line" layout="row" layout-align="start center">
+              <p flex=15 class="manage-text">Cover Image</p>
+              <input class="manage-input-file" type="file" ng-file-model="files" multiple />
+            </div>
+
+            <button ng-click="vm.addSeries()" class="admin-button">
+              Add series
+            </button>
+          </section>
+
+        </div>
+      </div>
+    </md-content>
+  </md-content>
+
+</div>

@@ -18,40 +18,67 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController() {
+    function NavbarController($scope, $location, $window) {
       var vm = this;
       vm.navItems = [];
-      vm.signIn = true;
-      vm.userEmail = '';
+      $scope.signIn = false;
+      $scope.user;
+      vm.displayName = '';
 
       vm.navItems = [{
         name: 'Home',
         icon: 'new_releases',
-        href: '#/'
+        href: ''
       }, {
         name: 'Archive',
         icon: 'grade',
-        href: '#archive'
+        href: 'archive'
       }, {
         name: 'Contact',
         icon: 'grade',
-        href: '#contact'
+        href: 'contact'
       }];
+
+      vm.go = function(path) {
+        $location.path('/' + path);
+      }
+
+      $scope.checkPermission = function() {
+        if ($scope.signIn &&
+          ($location.path() == '/register' ||
+          $location.path() == '/login'))
+          $window.location = '/';
+      }
+
+      $scope.checkPermissionNonUser = function() {
+        if (!$scope.signIn &&
+          ($location.path() == '/profile'))
+          $window.location = '/';
+      }
 
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
           // User is signed in.
-          vm.signIn = true;
-          vm.userEmail = user.email;
+          $scope.signIn = true;
+          $scope.user = user;
+          vm.displayName = user.displayName;
+          $scope.$apply();
+
+          $scope.checkPermission();
         } else {
           // No user is signed in.
-          vm.signIn = false;
+          $scope.signIn = false;
+          vm.displayName = '';
+          $scope.$apply();
+
+          $scope.checkPermissionNonUser();
         }
       });
 
       vm.logOut = function() {
         firebase.auth().signOut().then(function() {
           // Sign-out successful.
+          $window.location.reload();
         }, function(error) {
           // An error happened.
         });

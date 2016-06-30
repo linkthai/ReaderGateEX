@@ -46,6 +46,31 @@
         templateUrl: 'app/register/register-success.html',
         controller: 'RegisterController',
         controllerAs: 'vm'
+      })
+      .when('/profile', {
+        templateUrl: 'app/profile/profile.html',
+        controller: 'ProfileController',
+        controllerAs: 'vm'
+      })
+      .when('/add-new-series', {
+        templateUrl: 'app/management/add-new-series.html',
+        controller: 'ManagementController',
+        controllerAs: 'vm'
+      })
+      .when('/edit-series/:param1', {
+        templateUrl: 'app/management/edit-series.html',
+        controller: 'ManagementController',
+        controllerAs: 'vm'
+      })
+      .when('/add-chapter/:param1', {
+        templateUrl: 'app/management/add-chapter.html',
+        controller: 'ManagementController',
+        controllerAs: 'vm'
+      })
+      .when('/management', {
+        templateUrl: 'app/profile/management.html',
+        controller: 'ManagementController',
+        controllerAs: 'vm'
       });
       // .otherwise({
       //   redirectTo: '/'

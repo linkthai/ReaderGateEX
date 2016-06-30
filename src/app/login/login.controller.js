@@ -6,14 +6,9 @@
     .controller('LoginController', LoginController);
 
   /** @ngInject */
-  function LoginController($location) {
+  function LoginController($scope, $location, $window) {
     var vm = this;
     var user = firebase.auth().currentUser;
-
-    if (user) {
-      // User is signed in.
-      $location.path('/');
-    }
 
     vm.message = '';
     vm.email = "";
@@ -22,7 +17,11 @@
     vm.handleLogin = function() {
       firebase.auth().signInWithEmailAndPassword(vm.email, vm.password)
         .then(function() {
+          $scope.signIn = true;
           $location.path('/');
+        })
+        .then(function() {
+          $scope.apply();
         })
         .catch(function(error) {
           // Handle Errors here.

@@ -1,0 +1,29 @@
+<div layout="vertical" layout-fill>
+
+  <md-content flex class="body">
+    <header>
+      <nav-bar md-whiteframe-z2></nav-bar>
+    </header>
+
+    <md-content class="mid-content" data-ng-controller="ProfileController as vm">
+      <div class="main-content">
+        <div class="length" layout-align="space-between center">
+
+          <h1 class="cyan">Profile</h1>
+          <md-divider class="bg-cyan max-width"></md-divider>
+
+          <section flex class="profile-section">
+            <p class="profile-header">Information</p>
+            <div flex layout="column" class="profile-content">
+              <p flex layout="row"><span flex=20 class="bold black">First name:</span> <span> {{vm.info.firstName}} </span> </p>
+              <p flex layout="row"><span flex=20 class="bold black">Last name:</span> <span> {{vm.info.lastName}} <span></p>
+              <p flex layout="row"><span flex=20 class="bold black">Email:</span> <span> {{vm.email}}  <span> </p>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </md-content>
+  </md-content>
+
+</div>

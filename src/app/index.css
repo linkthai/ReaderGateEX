@@ -64,7 +64,6 @@ html {
 }
 .body {
   min-height: 1000px;
-  background-color: #FAFAFA;
 }
 .length {
   min-height: 1000px;
@@ -100,9 +99,18 @@ html {
 .black {
   color: var(--black);
 }
+.white {
+  color: white;
+}
+.bg-white {
+  background-color: white;
+}
 .margin {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+.no-margin {
+  margin: 0px;
 }
 .margin-center {
   margin: auto;
@@ -115,6 +123,7 @@ md-sidenav.md-locked-open.md-sidenav-left {
   width: 300px;
   min-width: 300px;
   max-width: 500px;
+  height: inherit;
 }
 .sidenav-button {
   padding: 20px;
@@ -374,8 +383,8 @@ md-sidenav.md-locked-open.md-sidenav-left {
 .errorvalidation {
   margin-left: 20px;
   margin-right: 20px;
-	margin-top: 10px;
-	color: red;
+  margin-top: 10px;
+  color: red;
 }
 .form-input {
   margin: 20px auto;
@@ -402,11 +411,88 @@ md-sidenav.md-locked-open.md-sidenav-left {
   outline-style: none;
 }
 .button-submit:hover {
-  cursor:hand;
-  cursor:pointer;
+  cursor: hand;
+  cursor: pointer;
   background-color: var(--primary-color-2);
 }
-.link-text{
-  margin: 20px;
+.link-text {
+  margin: 10px;
   color: var(--secondary-color);
+}
+.side-bar {
+  background-color: lightgray;
+}
+.side-bar-top {
+  height: 120px;
+}
+.md-user-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 10px;
+}
+.profile-section {
+  margin: auto;
+  max-width: 1000px;
+}
+.max-width {
+  margin: auto;
+  max-width: 1000px;
+}
+.profile-header {
+  color: var(--black);
+  font-size: 20px;
+  font-weight: bold;
+}
+.profile-content {
+  padding-left: 20px;
+}
+.admin-button {
+  background-color: var(--secondary-color);
+  border: none;
+  color: white;
+  margin: auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  height: 60px;
+  width: 190px;
+  border-radius: 5px;
+  border-bottom: 7px solid var(--secondary-color-10);
+  outline: none;
+}
+.admin-button:hover {
+  border-bottom: none;
+}
+.icon-aligned {
+  padding-bottom: 3px;
+}
+.manage-line {
+  margin-left: 30px;
+  margin-top: 20px;
+}
+.manage-text {
+  color: var(--black);
+  font-size: 18px;
+}
+.manage-input {
+  background-color: white;
+  border: 1px solid var(--primary-color-3);
+  border-radius: 3px;
+  height: 35px;
+  margin-left: 30px;
+  width: 300px;
+  padding: 5px;
+}
+.manage-input-area {
+  background-color: white;
+  border: 1px solid var(--primary-color-3);
+  border-radius: 3px;
+  margin-left: 30px;
+  width: 450px;
+  padding: 5px;
+}
+.manage-input-file {
+  margin-left: 30px;
+  width: 450px;
+  outline: none;
 }
