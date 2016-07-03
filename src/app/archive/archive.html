@@ -35,7 +35,7 @@
           </md-content>
           <md-content class="mid-content table-wrapper" layout="column" layout="stretch center" >
             <div class="table-list bottom-border-animation" ng-repeat="item in vm.comicList | orderBy:'title' | filter: vm.filterAlphabet" layout="row"
-            layout="start center" ng-click="vm.go(item.href)">
+            layout="start center" ng-click="vm.go(item.data)">
               <div flex=60 flex-xs=100 flex-sm=100>{{item.title}}</div>
               <div flex=20 hide-xs hide-sm>{{item.author}}</div>
               <div flex=20 hide-xs hide-sm>{{item.status}}</div>

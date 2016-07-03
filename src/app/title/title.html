@@ -43,8 +43,8 @@
                 Volumes
               </md-card-header>
               <md-content class="table-wrapper">
-                <div class="volume-item" ng-repeat-start="item in vm.chapList" ng-click="vm.go(item.vol, item.chap)">
-                  Volume {{ item.vol }} - Chapter {{ item.chap }} - {{ item.name }}
+                <div class="volume-item" ng-repeat-start="item in vm.chapList" ng-click="vm.go(item.vol, item.name, item.data)">
+                  Volume {{ item.vol }} - {{ item.name }}
                 </div>
                 <md-divider ng-repeat-end></md-divider>
               </md-content>

@@ -14,22 +14,22 @@
 
           <section layout="column" layout-align="space-around stretch">
             <div class="manage-line" layout="row" layout-align="start center">
-              <p flex=15 class="manage-text">Title</p>
+              <p flex=15 class="manage-text">{{vm.seriesName}}</p>
             </div>
             <div class="manage-line" layout="row" layout-align="start center">
               <p flex=15 class="manage-text">Name</p>
-              <input class="manage-input" type="text" />
+              <input class="manage-input" type="text" ng-model="_chapterName"/>
             </div>
             <div class="manage-line" layout="row" layout-align="start center">
               <p flex=15 class="manage-text">Chapter number</p>
-              <input class="manage-input" type="number" />
+              <input class="manage-input" type="number" ng-model="_chapter"/>
             </div>
             <div class="manage-line" layout="row" layout-align="start center">
               <p flex=15 class="manage-text">Upload pages</p>
               <input class="manage-input-file" type="file" ng-file-model="files" multiple />
             </div>
 
-            <button ng-click="vm.addSeries()" class="admin-button">
+            <button ng-click="upload()" class="admin-button">
               Add chapter
             </button>
           </section>

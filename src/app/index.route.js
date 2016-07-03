@@ -24,7 +24,7 @@
       })
       .when('/archive/:param1/:param2/:param3', {
         templateUrl: 'app/chapter/chapter.html',
-        controller: 'TitleController',
+        controller: 'ChapterController',
         controllerAs: 'vm'
       })
       .when('/contact', {

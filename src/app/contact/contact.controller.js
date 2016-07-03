@@ -41,6 +41,7 @@
   /** @ngInject */
   function ContactController($scope) {
     $scope.files = [];
+    $scope.bookId;
 
     $scope.upload = function() {
       alert($scope.files.length + " files selected ... Write your Upload Code");
@@ -51,20 +52,32 @@
       var book = $scope._book;
       var chapter = $scope._chapter;
       var chapterName = $scope._chapterName;
+      var bookId = $scope.bookId;
 
       var metadata = {
         contentType: 'image/jpeg'
       };
 
-      var chapterId = book + 'C' + chapter;
-      database.ref('chapters/' + book + '/chapter_' + chapter + '/').set({
-        "_name": chapterName,
+      var chapterId = 'C' + chapter;
+      database.ref('chapters/' + bookId + '/chapter_' + chapter + '/').set({
+        "_name": "Chapter " + chapter  + (chapterName == null ?  "" : " - " + chapterName),
         "_chapterId": chapterId
       });
 
       var idx = 0;
+
+      // Create a reference to the file to delete
+      var desertRef = storageRef.child(bookId + '/' + chapter);
+
+      // Delete the file
+      desertRef.delete().then(function() {
+        console.log("File deleted successfully");
+      }).catch(function(error) {
+        console.log("Failed to delete file");
+      });
+
       angular.forEach(files, function(value, key) {
-        var uploadTask = storageRef.child(book + '/' + chapter + '/' + value.name).put(value._file, metadata);
+        var uploadTask = storageRef.child(bookId + '/' + chapter + '/' + value.name).put(value._file, metadata);
 
         // Listen for state changes, errors, and completion of the upload.
         uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
@@ -100,11 +113,10 @@
             idx = idx + 1;
             // Upload completed successfully, now we can get the download URL
             var downloadURL = uploadTask.snapshot.downloadURL;
-
             console.log('URL: ' + downloadURL);
 
             //database.ref('chapters/' + book + '/chapter ' + chapter + '/' + 'page ' + idx).set(downloadURL);
-            database.ref('pages/' + book + '/' + chapterId + '/' + 'page ' + idx).set(downloadURL);
+            database.ref('pages/' + bookId + '/' + chapterId + '/' + 'page ' + idx).set(downloadURL);
           });
       });
     };
@@ -120,6 +132,8 @@
       var _views = $scope._views;
       var _coverUrl = "adadads";
 
+      var newPostKey = database.ref().child('series').push().key;
+
       var postData = {
         "_name": _book,
         "_genres": _genres,
@@ -127,16 +141,20 @@
         "_status": _status,
         "_description": _description,
         "_cover": _coverUrl,
-        "_views": _views
+        "_views": _views,
+        "_bookId": newPostKey
       }
 
-      database.ref('series/' + _book).set(postData);
+      var updates = {};
+      updates['/series/' + newPostKey] = postData;
+      database.ref().update(updates);
+
+      $scope.bookId = newPostKey;
     }
 
     $scope.getAllSeries = function() {
       var auth = firebase.auth();
       var database = firebase.database();
-      var book = $scope._book;
 
       $scope.seriesInfo = [];
       database.ref('series/').on('value', function(snapshot) {
@@ -147,12 +165,12 @@
       });
     }
 
-    $scope.getChaptersBySeries = function(seriesName) {
+    $scope.getChaptersBySeries = function(seriesId) {
       var auth = firebase.auth();
       var database = firebase.database();
 
       $scope.chaptersInfo = [];
-      database.ref('chapters/' + seriesName).on('value', function(snapshot) {
+      database.ref('chapters/' + seriesId).on('value', function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
           var childData = childSnapshot.val();
           $scope.chaptersInfo.push(childData);
@@ -160,17 +178,37 @@
       });
     }
 
-    $scope.getPagesByChapter = function(seriesName, chapterId) {
+    $scope.getPagesByChapter = function(seriesId, chapterId) {
       var auth = firebase.auth();
-      var databaseRef = firebase.database().ref('pages/' + seriesName + '/' + chapterId);
+      var databaseRef = firebase.database().ref('pages/' + seriesId + '/' + chapterId);
 
       $scope.pages = [];
       databaseRef.on('value', function(snapshot) {
-          var data = snapshot.val();
-          var length = snapshot.numChildren();
-          for (var i = 1; i <= length; i++) {
-            $scope.pages.push(data['page ' + i]);
+        snapshot.forEach(function(childSnapshot) {
+          var childData = childSnapshot.val();
+          $scope.pages.push(childData.url);
+        });
+
+        function naturalCompare(a, b) {
+          var ax = [],
+            bx = [];
+
+          a.replace(/(\d+)|(\D+)/g, function(_, $1, $2) {
+            ax.push([$1 || Infinity, $2 || ""])
+          });
+          b.replace(/(\d+)|(\D+)/g, function(_, $1, $2) {
+            bx.push([$1 || Infinity, $2 || ""])
+          });
+
+          while (ax.length && bx.length) {
+            var an = ax.shift();
+            var bn = bx.shift();
+            var nn = (an[0] - bn[0]) || an[1].localeCompare(bn[1]);
+            if (nn) return nn;
           }
+          return ax.length - bx.length;
+        }
+        $scope.pages = $scope.pages.sort(naturalCompare);
       });
     }
   }

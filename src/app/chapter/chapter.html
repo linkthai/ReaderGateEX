@@ -5,27 +5,27 @@
       <nav-bar md-whiteframe-z2></nav-bar>
     </header>
 
-    <md-content class="mid-content" data-ng-controller="TitleController as vm">
+    <md-content class="mid-content" data-ng-controller="ChapterController as vm">
       <div class="main-content">
         <div class="length" layout="column" layout-align="space-between center">
           <div class="chapter-navbar" layout="row" layout-align="space-around center">
             <div class="chapter-icon previous-icon"></div>
             <select ng-change="vm.changeVol()" ng-model="vm.selectedChapter" class="chapter-select"
-            ng-options="item as ('Volume ' + item.vol + ' - Chapter ' + item.chap + ' - ' + item.name) for item in vm.chapList">
+            ng-options="item as ('Volume ' + item.vol + ' - ' + item.name) for item in vm.chapList">
             </select>
             <div class="chapter-icon next-icon"></div>
           </div>
 
           <div flex=80 class="chapter-pages">
-            <div flex=100 ng-repeat="page in vm.chapPages">
-              <img class="chapter-page" src="{{page.url}}"/>
+            <div flex=100 ng-repeat="page in chapPages">
+              <img class="chapter-page" src= {{page}}/>
             </div>
           </div>
 
           <div class="chapter-navbar" layout="row" layout-align="space-around center">
             <div class="chapter-icon previous-icon"></div>
             <select ng-change="vm.changeVol()" ng-model="vm.selectedChapter" class="chapter-select"
-            ng-options="item as ('Volume ' + item.vol + ' - Chapter ' + item.chap + ' - ' + item.name) for item in vm.chapList">
+            ng-options="item as ('Volume ' + item.vol + ' - ' + item.name) for item in vm.chapList">
             </select>
             <div class="chapter-icon next-icon"></div>
           </div>
