@@ -59,7 +59,7 @@
       icon: "people"
     }];
 
-    $scope.addInfo = function(_coverUrl) {
+    $scope.addInfo = function() {
       var auth = firebase.auth();
       var database = firebase.database();
 
@@ -75,8 +75,10 @@
         "_genres": _genres,
         "_author": _author,
         "_description": _description,
-        "_cover": _coverUrl,
-        "_bookId": newPostKey
+        "_cover": "N/A",
+        "_bookId": newPostKey,
+        "_status": "Ongoing",
+        "_views": 0
       }
 
       var updates = {};
@@ -84,7 +86,11 @@
       database.ref().update(updates);
 
       alert("New series successfully added");
+
+      return newPostKey;
     }
+
+    $scope.bookId;
 
     $scope.addSeries = function() {
       var auth = firebase.auth();
@@ -92,6 +98,9 @@
       var database = firebase.database();
       var files = $scope.files;
       var title = $scope._title;
+
+      $scope.bookId = $scope.addInfo();
+
       var bookId = $scope.bookId;
 
       var metadata = {
@@ -145,15 +154,45 @@
           // Upload completed successfully, now we can get the download URL
           var downloadURL = uploadTask.snapshot.downloadURL;
           console.log('URL: ' + downloadURL);
-          $scope.addInfo(downloadURL);
+
+          var auth = firebase.auth();
+          var database = firebase.database();
+
+          database.ref('series/' + $scope.bookId).on('value', function(snapshot) {
+              var postData = snapshot.val();
+              postData._cover = downloadURL;
+              var updates = {};
+              updates['/series/' + $scope.bookId] = postData;
+              database.ref().update(updates);
+          });
         });
     };
 
-    var arr = bookService.getvalue();
+    var arr = bookService.getValue();
     var selectingSeries = arr[0];
-    if (selectingSeries != null) {
-      vm.seriesName = selectingSeries._title;
+
+    var LocalStorageManager = {
+      setValue: function(key, value) {
+        window.localStorage.setItem(key, JSON.stringify(value));
+      },
+      getValue: function(key) {
+        try {
+          return JSON.parse(window.localStorage.getItem(key));
+        } catch (e) {
+
+        }
+      }
+    };
+
+    if (selectingSeries != null && LocalStorageManager.getValue("selectingSeries") == null) {
+      LocalStorageManager.setValue("selectingSeries", selectingSeries);
     }
+    else {
+      if (selectingSeries == null && LocalStorageManager.getValue("selectingSeries") != null)
+        selectingSeries = LocalStorageManager.getValue("selectingSeries");
+    }
+
+    vm.seriesName = selectingSeries._title;
 
     $scope.upload = function() {
       var auth = firebase.auth();
@@ -184,6 +223,11 @@
         console.log("File deleted successfully");
       }).catch(function(error) {
         console.log("Failed to delete file");
+      });
+
+      database.ref('latest_update/').push({
+        "_bookId" : bookId,
+        "_chapterId" : chapterId
       });
 
       angular.forEach(files, function(value, key) {
@@ -230,6 +274,21 @@
           });
       });
     };
+
+    //Get latest updates function, limit to 30 last childs
+    vm.latest = [];
+    function getLatestUpdate() {
+      var auth = firebase.auth();
+      var database = firebase.database();
+
+      database.ref("latest_update/").limitToLast(30).on("value", function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var childData = childSnapshot.val();
+          vm.latest.push(childData);
+        });
+      });
+    }
+    getLatestUpdate();
 
   }
 })();
