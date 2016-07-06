@@ -39,7 +39,7 @@
     }]);
 
   /** @ngInject */
-  function ManagementController($location, $scope, bookService) {
+  function ManagementController($location, $routeParams, $scope, $timeout, bookService) {
     var vm = this;
     vm.seriesName = "title";
 
@@ -58,6 +58,76 @@
       name: "Management",
       icon: "people"
     }];
+
+    var arr = bookService.getValue();
+    var selectingSeries = arr[0];
+
+    var LocalStorageManager = {
+      setValue: function(key, value) {
+        window.localStorage.setItem(key, JSON.stringify(value));
+      },
+      getValue: function(key) {
+        try {
+          return JSON.parse(window.localStorage.getItem(key));
+        } catch (e) {
+
+        }
+      }
+    };
+
+    if (selectingSeries != null) {
+      LocalStorageManager.setValue("selectingSeries", selectingSeries);
+    }
+    else {
+      if (LocalStorageManager.getValue("selectingSeries") != null)
+        selectingSeries = LocalStorageManager.getValue("selectingSeries");
+    }
+
+    vm.seriesName = selectingSeries._title;
+
+    var flag = false;
+    $scope.editSeries = function() {
+      $timeout(function () {
+          flag = true;
+      }, 10);
+      $scope.addSeries();
+    }
+
+    $scope.updateInfo = function() {
+      var auth = firebase.auth();
+      var database = firebase.database();
+
+      var _title = $scope._title;
+      var _genres = $scope._genres;
+      var _author = $scope._author;
+      var _description = $scope._description;
+
+      var stt;
+      if ($scope.isComplete == true) {
+        stt = "Completed";
+      }
+      else {
+        stt = "Ongoing";
+      }
+
+      var postData = {
+        "_title": _title,
+        "_genres": _genres,
+        "_author": _author,
+        "_description": _description,
+        "_cover": "N/A",
+        "_bookId": $routeParams.param1,
+        "_status": stt,
+        "_views": selectingSeries._views
+      }
+
+      var updates = {};
+      updates['/series/' + $routeParams.param1] = postData;
+      database.ref().update(updates);
+
+      alert("New series successfully added");
+      return $routeParams.param1;
+    }
 
     $scope.addInfo = function() {
       var auth = firebase.auth();
@@ -99,7 +169,12 @@
       var files = $scope.files;
       var title = $scope._title;
 
-      $scope.bookId = $scope.addInfo();
+      if (flag)
+        $scope.bookId = $scope.addInfo();
+      else {
+          $scope.bookId = $scope.updateInfo();
+          flag = false;
+      }
 
       var bookId = $scope.bookId;
 
@@ -168,32 +243,6 @@
         });
     };
 
-    var arr = bookService.getValue();
-    var selectingSeries = arr[0];
-
-    var LocalStorageManager = {
-      setValue: function(key, value) {
-        window.localStorage.setItem(key, JSON.stringify(value));
-      },
-      getValue: function(key) {
-        try {
-          return JSON.parse(window.localStorage.getItem(key));
-        } catch (e) {
-
-        }
-      }
-    };
-
-    if (selectingSeries != null && LocalStorageManager.getValue("selectingSeries") == null) {
-      LocalStorageManager.setValue("selectingSeries", selectingSeries);
-    }
-    else {
-      if (selectingSeries == null && LocalStorageManager.getValue("selectingSeries") != null)
-        selectingSeries = LocalStorageManager.getValue("selectingSeries");
-    }
-
-    vm.seriesName = selectingSeries._title;
-
     $scope.upload = function() {
       var auth = firebase.auth();
       var storageRef = firebase.storage().ref();
@@ -201,7 +250,7 @@
       var files = $scope.files;
       var chapter = $scope._chapter;
       var chapterName = $scope._chapterName;
-      var bookId = selectingSeries._bookId;
+      var bookId = $routeParams.param1;
 
       var metadata = {
         contentType: 'image/jpeg'
@@ -209,7 +258,7 @@
 
       var chapterId = 'C' + chapter;
       database.ref('chapters/' + bookId + '/chapter_' + chapter + '/').set({
-        "_name": "Chapter " + chapter + (chapterName == null ? "" : " - " + chapterName),
+        "_name": chapterName,
         "_chapterId": chapterId
       });
 
@@ -227,7 +276,9 @@
 
       database.ref('latest_update/').push({
         "_bookId" : bookId,
-        "_chapterId" : chapterId
+        "_title" : vm.seriesName,
+        "_chapterId" : chapterId,
+        "_chapterName" : chapterName
       });
 
       angular.forEach(files, function(value, key) {

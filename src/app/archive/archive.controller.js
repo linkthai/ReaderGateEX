@@ -6,7 +6,7 @@
     .controller('ArchiveController', ArchiveController);
 
   /** @ngInject */
-  function ArchiveController($location, $scope, bookService) {
+  function ArchiveController($location, $scope, $timeout, bookService) {
     var vm = this;
     vm.comicList = [];
 
@@ -51,95 +51,6 @@
       $location.path('/add-new-series');
     };
 
-    // vm.comicList = [{
-    //   title: 'Conans',
-    //   author: 'sdasd',
-    //   status: 'Incomplete',
-    //   char: 'A'
-    // }, {
-    //   title: 'One Piece',
-    //   author: 'Oda',
-    //   status: 'Completed'
-    // }, {
-    //   title: 'Naruto',
-    //   author: '231',
-    //   status: 'Completed'
-    // }, {
-    //   title: 'Bleach',
-    //   author: 'ffff',
-    //   status: 'Incomplete'
-    // }, {
-    //   title: 'Uzumaki',
-    //   author: '12121212',
-    //   status: 'Incomplete'
-    // }, {
-    //   title: 'One Piece',
-    //   author: 'Oda',
-    //   status: 'Completed'
-    // }, {
-    //   title: '~Hello~',
-    //   author: '231',
-    //   status: 'Completed'
-    // }, {
-    //   title: '2 Days',
-    //   author: 'ffff',
-    //   status: 'Incomplete'
-    // }, {
-    //   title: 'Antagonist',
-    //   author: '12121212',
-    //   status: 'Incomplete',
-    //   href: '123'
-    // }, {
-    //   title: 'One Piece',
-    //   author: 'Oda',
-    //   status: 'Completed'
-    // }, {
-    //   title: 'Alternate',
-    //   author: '231',
-    //   status: 'Completed',
-    //   href: '231'
-    // }, {
-    //   title: 'Bleach',
-    //   author: 'ffff',
-    //   status: 'Incomplete'
-    // }, {
-    //   title: 'Uzumaki',
-    //   author: '12121212',
-    //   status: 'Incomplete'
-    // }, {
-    //   title: 'One Piece',
-    //   author: 'Oda',
-    //   status: 'Completed'
-    // }, {
-    //   title: 'Naruto',
-    //   author: '231',
-    //   status: 'Completed'
-    // }, {
-    //   title: 'Bleach',
-    //   author: 'ffff',
-    //   status: 'Incomplete'
-    // }, {
-    //   title: 'Uzumaki',
-    //   author: '12121212',
-    //   status: 'Incomplete'
-    // }, {
-    //   title: 'One Piece',
-    //   author: 'Oda',
-    //   status: 'Completed'
-    // }, {
-    //   title: 'Naruto',
-    //   author: '231',
-    //   status: 'Completed'
-    // }, {
-    //   title: 'Bleach',
-    //   author: 'ffff',
-    //   status: 'Incomplete'
-    // }, {
-    //   title: 'Uzumaki',
-    //   author: '12121212',
-    //   status: 'Incomplete'
-    // }];
-
     $scope.getAllSeries = function() {
       var auth = firebase.auth();
       var database = firebase.database();
@@ -151,11 +62,16 @@
             data: childData,
             title: childData._title,
             author: childData._author,
-            status: 'Incomplete'
+            status: childData._status,
+            views: childData._views
           });
+          $timeout(function () {
+              $scope.$apply();
+          }, 1);
         });
       });
     }
     $scope.getAllSeries();
+
   }
 })();
