@@ -496,3 +496,17 @@ md-sidenav.md-locked-open.md-sidenav-left {
   width: 450px;
   outline: none;
 }
+.search-input {
+  background-color: white;
+  border: 1px solid var(--primary-color-3);
+  border-radius: 3px;
+  height: 40px;
+  padding: 5px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.search-content {
+  margin: auto;
+  margin-top: 20px;
+  max-width: 1000px;
+}

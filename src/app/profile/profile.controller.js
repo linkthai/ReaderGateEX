@@ -6,23 +6,37 @@
     .controller('ProfileController', ProfileController);
 
   /** @ngInject */
-  function ProfileController($scope, $location) {
+  function ProfileController($scope, $window, $location) {
     var vm = this;
     vm.email = '';
     vm.uid = '';
     vm.photoUrl = '';
     vm.uid = '';
+    vm.firstName = '';
+    vm.lastName = '';
     vm.info = [];
+    vm.count = '';
 
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-          vm.email = user.email;
-          vm.uid = user.uid;
-          vm.photoUrl = user.photoURL;
-          vm.uid = user.uid;
+        vm.email = user.email;
+        vm.uid = user.uid;
+        vm.photoUrl = user.photoURL;
+        vm.uid = user.uid;
+        vm.getInfo(user.uid);
 
-          vm.getInfo(user.uid);
+        (function myLoop(i) {
+          setTimeout(function() {
+             $scope.$apply();//  your code here
+             if (vm.info.length != 0)
+              return;
+            if (--i) myLoop(i) //  decrement i and call myLoop again if i > 0
+          }, 50)
+        })(100);
+
+        $scope.$apply();
+
       } else {
         // No user is signed in.
       }
@@ -34,7 +48,6 @@
       database.ref('users/' + uid).on('value', function(snapshot) {
         vm.info = snapshot.val();
       });
-      $scope.apply();
     }
 
   }

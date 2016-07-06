@@ -1,0 +1,25 @@
+<div layout="vertical" layout-fill>
+
+  <md-content flex class="body">
+    <header>
+      <nav-bar md-whiteframe-z2></nav-bar>
+    </header>
+
+    <md-content class="mid-content" data-ng-controller="SearchController as vm">
+      <div class="main-content">
+        <div class="length" layout-align="space-between center">
+
+          <h1 class="cyan">Search</h1>
+          <md-divider class="bg-cyan max-width"></md-divider>
+
+          <div class="search-content" layout-gt-xs="row" layout="column" layout-align="space-around center">
+            <input flex-gt-xs=70 flex=100 class="search-input" type="text" ng-model="vm.searchString" />
+            <button ng-click="vm.searchPressed()" flex-gt-xs=30 flex=100 class="button-submit" type="submit">Search</button>
+          </div>
+
+        </div>
+      </div>
+    </md-content>
+  </md-content>
+
+</div>

@@ -15,8 +15,11 @@
 
   <div layout="row" layout-align="end center">
     <md-input-container id="search-box" md-no-float layout-align="end center">
-      <input hide-xs hide-sm class="grey" ng-model="vm.search" type="text" placeholder="Search">
-      <md-icon class="search-button"><i class="cyan material-icons md-12">search</i></md-icon>
+      <form ng-submit="vm.goSearchQuery()">
+      <input hide-xs hide-sm class="grey" ng-model="vm.search" type="text"
+      placeholder="Search">
+    </form>
+      <md-icon ng-click="vm.goSearch()" class="search-button"><i class="cyan material-icons md-12">search</i></md-icon>
     </md-input-container>
 
     <div layout="row" class="menu-bar" layout-align="end center">

@@ -44,6 +44,7 @@
               vm.uid = newUser.uid;
 
               var postData = {
+                "admin": false,
                 "firstName": vm.firstname,
                 "lastName": vm.lastname
               };

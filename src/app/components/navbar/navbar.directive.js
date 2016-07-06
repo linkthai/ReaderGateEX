@@ -18,12 +18,14 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController($scope, $location, $window) {
+    function NavbarController($scope, $rootScope, $location, $window) {
       var vm = this;
       vm.navItems = [];
       $scope.signIn = false;
       $scope.user;
+      $scope.userInfo = [];
       vm.displayName = '';
+      vm.search = '';
 
       vm.navItems = [{
         name: 'Home',
@@ -39,6 +41,15 @@
         href: 'contact'
       }];
 
+      $scope.getInfo = function(uid) {
+        var database = firebase.database();
+
+        database.ref('users/' + uid).on('value', function(snapshot) {
+          vm.info = snapshot.val();
+        });
+        $scope.apply();
+      }
+
       vm.go = function(path) {
         $location.path('/' + path);
       }
@@ -46,7 +57,7 @@
       $scope.checkPermission = function() {
         if ($scope.signIn &&
           ($location.path() == '/register' ||
-          $location.path() == '/login'))
+            $location.path() == '/login'))
           $window.location = '/';
       }
 
@@ -54,6 +65,23 @@
         if (!$scope.signIn &&
           ($location.path() == '/profile'))
           $window.location = '/';
+      }
+
+      vm.logOut = function() {
+        $window.location.reload();
+        firebase.auth().signOut().then(function() {
+          // Sign-out successful.
+        }, function(error) {
+          // An error happened.
+        });
+      };
+
+      vm.goSearchQuery = function () {
+        $location.path('/search/' + vm.search)
+      }
+
+      vm.goSearch = function () {
+        $location.path('/search');
       }
 
       firebase.auth().onAuthStateChanged(function(user) {
@@ -65,6 +93,7 @@
           $scope.$apply();
 
           $scope.checkPermission();
+
         } else {
           // No user is signed in.
           $scope.signIn = false;
@@ -74,15 +103,6 @@
           $scope.checkPermissionNonUser();
         }
       });
-
-      vm.logOut = function() {
-        firebase.auth().signOut().then(function() {
-          // Sign-out successful.
-          $window.location.reload();
-        }, function(error) {
-          // An error happened.
-        });
-      };
     }
   }
 

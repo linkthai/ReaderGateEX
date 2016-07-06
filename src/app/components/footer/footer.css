@@ -1,0 +1,19 @@
+.footer
+{
+  min-height: 150px;
+  background-color: #0097A7;
+}
+.link {
+  width: 90%;
+  margin: auto;
+  padding: 20px;
+}
+.link-text {
+  color: #B2EBF2;
+  cursor: pointer;
+  cursor: hand;
+  margin: 15px;
+}
+.link-section {
+  margin: 15px;
+}

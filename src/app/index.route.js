@@ -67,9 +67,14 @@
         controller: 'ManagementController',
         controllerAs: 'vm'
       })
-      .when('/management', {
-        templateUrl: 'app/profile/management.html',
-        controller: 'ManagementController',
+      .when('/search', {
+        templateUrl: 'app/search/search.html',
+        controller: 'SearchController',
+        controllerAs: 'vm'
+      })
+      .when('/search/:param1', {
+        templateUrl: 'app/search/search.html',
+        controller: 'SearchController',
         controllerAs: 'vm'
       });
       // .otherwise({
