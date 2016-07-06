@@ -502,11 +502,25 @@ md-sidenav.md-locked-open.md-sidenav-left {
   border-radius: 3px;
   height: 40px;
   padding: 5px;
-  margin-left: 20px;
-  margin-right: 20px;
 }
 .search-content {
   margin: auto;
   margin-top: 20px;
   max-width: 1000px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.search-result {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  cursor: hand;
+  cursor: pointer;
+  outline-style: none;
+}
+.search-result:hover {
+  color: var(--secondary-color);
+}
+.result-number {
+  font-style: italic;
+  color: var(--secondary-color-3);
 }
