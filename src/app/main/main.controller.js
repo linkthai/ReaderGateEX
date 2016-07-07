@@ -11,9 +11,9 @@
 
     vm.text = '';
     vm.title = '';
-    vm.selectItem = selectItem;
     vm.newRelease = [];
     vm.mostPopular = [];
+    vm.latestUpdate = [];
 
     function selectItem(item) {
       vm.title = item.name;
@@ -80,25 +80,27 @@
       })(100);
     }
 
+    $scope.getLatestUpdate = function() {
+      vm.latestUpdate.length = 0;
+      var database = firebase.database();
+
+      database.ref("latest_update/").limitToLast(30).on("value", function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var childData = childSnapshot.val();
+          vm.latestUpdate.push(childData);
+        });
+      });
+
+      (function myLoop(i) {
+        setTimeout(function() {
+           $scope.$apply();
+          if (--i) myLoop(i)
+        }, 50)
+      })(100);
+    }
+
     $scope.getNewRelease();
     $scope.getMostPopular();
-
-    vm.latestUpdate = [{
-      name: 'Naruto',
-      vol: 10,
-      chap: 20
-    }, {
-      name: 'DragonBall',
-      vol: 32,
-      chap: 49
-    }, {
-      name: 'One Piece',
-      vol: 98,
-      chap: 24
-    }, {
-      name: 'Detective Conan',
-      vol: 20,
-      chap: 13
-    }];
+    $scope.getLatestUpdate();
   }
 })();

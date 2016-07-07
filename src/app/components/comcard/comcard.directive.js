@@ -17,8 +17,7 @@
         bookGenres: '@bookGenres',
         bookTitle: '@bookTitle',
         bookCover: '@bookCover',
-        bookAuthor: '@bookAuthor',
-        bookCover: '@bookCover'
+        bookAuthor: '@bookAuthor'
       }
     }
     return directive;

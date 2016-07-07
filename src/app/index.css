@@ -163,16 +163,47 @@ md-sidenav.md-locked-open.md-sidenav-left {
 .right-bar-text {
   font-size: 18px;
   padding: 10px;
+  cursor: pointer;
+  cursor: hand;
+
+  margin-left: -15px;
+  padding-left: 0px;
+  transition: padding-left 0.5s linear;
+  /* vendorless fallback */
+  -o-transition: padding-left 0.5s linear;
+  /* opera */
+  -ms-transition: padding-left 0.5s linear;
+  /* IE 10 */
+  -moz-transition: padding-left 0.5s linear;
+  /* Firefox */
+  -webkit-transition: padding-left 0.5s linear;
+  /*safari and chrome */
+}
+.right-bar-text:hover {
+  padding-left: 10px;
+}
+.right-bar-text:hover .right-bar-icon {
+  opacity: 100;
 }
 .right-bar-name {
   font-weight: bold;
-  color: var(--secondary-color-2);
-  cursor: pointer;
-  cursor: hand;
-}
-.right-bar-name:hover {
   color: var(--secondary-color);
 }
+.right-bar-icon {
+  opacity: 0;
+
+  transition: opacity 0.5s linear;
+  /* vendorless fallback */
+  -o-transition: opacity 0.5s linear;
+  /* opera */
+  -ms-transition: opacity 0.5s linear;
+  /* IE 10 */
+  -moz-transition: opacity 0.5s linear;
+  /* Firefox */
+  -webkit-transition: opacity 0.5s linear;
+  /*safari and chrome */
+}
+.right-bar-icon:hover {}
 .com-card-wrapper {
   height: 100%;
 }
