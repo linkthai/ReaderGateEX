@@ -14,6 +14,7 @@
     vm.previousEnabled = true;
 
     vm.go = function(chap, name) {
+      vm.increaseViews();
       $location.path('/archive/' + vm.titleId + '/' + chap + '/' + name);
     };
 
@@ -28,6 +29,19 @@
     vm.addChapter = function() {
       bookService.addValue($scope.bookData);
       $location.path('/add-chapter/' + vm.titleId);
+    }
+
+    vm.increaseViews = function() {
+      var auth = firebase.auth();
+      var database = firebase.database();
+
+      database.ref('series/' + vm.titleId).once('value', function(snapshot) {
+          var postData = snapshot.val();
+          postData._views = postData._views + 1;
+          var updates = {};
+          updates['/series/' + vm.titleId] = postData;
+          database.ref().update(updates);
+      });
     }
 
     $scope.bookData;

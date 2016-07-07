@@ -85,12 +85,12 @@
 
     vm.seriesName = selectingSeries._title;
 
-    var flag = false;
+    vm.flag = false;
     $scope.editSeries = function() {
+      vm.flag = true;
       $timeout(function () {
-          flag = true;
+          $scope.addSeries();
       }, 10);
-      $scope.addSeries();
     }
 
     $scope.updateInfo = function() {
@@ -150,7 +150,6 @@
         "_status": "Ongoing",
         "_views": 0
       }
-
       var updates = {};
       updates['/series/' + newPostKey] = postData;
       database.ref().update(updates);
@@ -169,11 +168,12 @@
       var files = $scope.files;
       var title = $scope._title;
 
-      if (flag)
+      alert(vm.flag);
+      if (!vm.flag)
         $scope.bookId = $scope.addInfo();
       else {
           $scope.bookId = $scope.updateInfo();
-          flag = false;
+          vm.flag = false;
       }
 
       var bookId = $scope.bookId;
@@ -318,10 +318,13 @@
             idx = idx + 1;
             // Upload completed successfully, now we can get the download URL
             var downloadURL = uploadTask.snapshot.downloadURL;
+            var fileName = uploadTask.snapshot.metadata.name;
             console.log('URL: ' + downloadURL);
 
-            //database.ref('chapters/' + book + '/chapter ' + chapter + '/' + 'page ' + idx).set(downloadURL);
-            database.ref('pages/' + bookId + '/' + chapterId + '/' + 'page ' + idx).set(downloadURL);
+            database.ref('pages/' + bookId + '/' + chapterId + '/' + 'page ' + idx).set({
+              "url": downloadURL,
+              "fileName": fileName
+            });
           });
       });
     };

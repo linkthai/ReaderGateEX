@@ -11,7 +11,7 @@
           <div class="chapter-navbar" layout="row" layout-align="space-around center">
             <div class="chapter-icon previous-icon"></div>
             <select ng-change="vm.changeVol()" ng-model="vm.selectedChapter" class="chapter-select"
-            ng-options="item as ('Volume ' + item.vol + ' - ' + item.name) for item in vm.chapList">
+            ng-options="item as (item.name) for item in vm.chapList">
             </select>
             <div class="chapter-icon next-icon"></div>
           </div>
