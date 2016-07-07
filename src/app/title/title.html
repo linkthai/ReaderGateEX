@@ -9,13 +9,14 @@
       <div class="main-content">
         <div layout="column" layout-gt-sm="row">
           <div flex=100>
-            <span class="title-name">{{ vm.title }}</span>
+            <div class="title-name">{{ vm.title }}</div>
             <md-card layout="column">
               <md-card-content layout-gt-sm="row" layout="column" layout="space-around center">
-                <div flex-lg=50 flex-md=70 flex-sm=80 flex-xs=100>
-                  <img class="comcard-image" src="{{ vm.cover }}" />
+                <div flex-lg=35 flex-md=70 flex-sm=80 flex-xs=100>
+                  <img class="title-image" src="{{ vm.cover }}" />
                 </div>
                 <md-content class="title-info-wrapper" flex-gt-sm flex=100>
+                  <md-divider flex=100 hide-gt-sm></md-divider>
                   <div class="title-info"> <span class="bold">Genres:</span> {{ vm.genres }} </div>
                   <div class="title-info"> <span class="bold">Author:</span> {{ vm.author }} </div>
                   <div class="title-info" layout="row" flex=100>

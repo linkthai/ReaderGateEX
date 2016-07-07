@@ -5,50 +5,92 @@
       <nav-bar></nav-bar>
     </header>
 
-    <div ng-hide=true class="bg-light-grey body">
-
-      <md-sidenav md-is-locked-open="$mdMedia('gt-sm')" md-padding class="md-sidenav-left md-whiteframe-z2">
-        <md-button ng-repeat-start="item in vm.menuItems" layout="column" layout-align="space-around center" flex ng-click="vm.selectItem(item)" class="black sidenav-button" ui-sref-active="cyan" ui-sref="{{item.sref}}">
-          <div hide-sm hide-md class="md-tile-content">
-            <i class="material-icons md-36">{{item.icon}}</i>
-          </div>
-          <div class="md-tile-content">
-            {{item.name}}
-          </div>
-        </md-button>
-        <md-divider ng-repeat-end></md-divider>
-      </md-sidenav>
-    </div>
-
     <md-content class="mid-content" data-ng-controller="MainController as vm">
       <div class="main-content" layout-gt-sm="row" layout="column">
         <div class="list-section" flex=100>
-          <md-content ng-repeat-start="item in vm.menuItems">
+          <md-content>
             <div class="header-text">
-              {{item.name}}
+              NEW RELEASE
             </div>
             <md-content class="list-comcard" layout-wrap
              layout-gt-md="row" layout="column" layout-align="start center">
-            <div flex-gt-md=50 layout-gt-xs="row" layout="column">
-              <div flex>
-                <com-card book-title="{{vm.newRelease[3].title}}" ng-click="vm.goToTitle(3)"
-                book-cover="{{vm.newRelease[3].cover}}"></com-card>
+            <div flex-gt-md=50 layout-gt-xs="row" layout="column" layout-fill>
+              <div class="com-card-wrapper" flex layout-fill>
+                <com-card layout-fill ng-click="vm.goToTitleNewRelease(3)"
+                 book-genres="{{vm.newRelease[3].genres}}"
+                 book-author="{{vm.newRelease[3].author}}"
+                 book-title="{{vm.newRelease[3].title}}"
+                 book-cover="{{vm.newRelease[3].cover}}"></com-card>
               </div>
-              <div flex>
-                <com-card></com-card>
+              <div class="com-card-wrapper" flex layout-fill>
+                <com-card layout-fill ng-click="vm.goToTitleNewRelease(2)"
+                 book-title="{{vm.newRelease[2].title}}"
+                 book-cover="{{vm.newRelease[2].cover}}"
+                 book-genres="{{vm.newRelease[2].genres}}"
+                 book-author="{{vm.newRelease[2].author}}"></com-card>
               </div>
             </div>
             <div flex-gt-md=50 layout-gt-xs="row" layout="column">
-              <div flex>
-                <com-card></com-card>
+              <div flex layout-fill>
+                <com-card ng-click="vm.goToTitleNewRelease(1)"
+                 book-title="{{vm.newRelease[1].title}}"
+                 book-cover="{{vm.newRelease[1].cover}}"
+                 book-genres="{{vm.newRelease[1].genres}}"
+                 book-author="{{vm.newRelease[1].author}}"></com-card>
               </div>
-              <div flex>
-                <com-card></com-card>
+              <div flex layout-fill>
+                <com-card ng-click="vm.goToTitleNewRelease(0)"
+                 book-title="{{vm.newRelease[0].title}}"
+                 book-cover="{{vm.newRelease[0].cover}}"
+                 book-genres="{{vm.newRelease[0].genres}}"
+                 book-author="{{vm.newRelease[0].author}}"></com-card>
               </div>
             </div>
             </md-content>
           </md-content>
-          <md-divider  class="margin" ng-repeat-end></md-divider>
+
+          <md-divider  class="margin"></md-divider>
+
+          <md-content>
+            <div class="header-text">
+              MOST POPULAR
+            </div>
+            <md-content class="list-comcard" layout-wrap
+             layout-gt-md="row" layout="column" layout-align="start center">
+            <div flex-gt-md=50 layout-gt-xs="row" layout="column">
+              <div flex layout-fill>
+                <com-card ng-click="vm.goToTitleMostPopular(3)"
+                 book-genres="{{vm.mostPopular[3].genres}}"
+                 book-author="{{vm.mostPopular[3].author}}"
+                 book-title="{{vm.mostPopular[3].title}}"
+                 book-cover="{{vm.mostPopular[3].cover}}"></com-card>
+              </div>
+              <div flex layout-fill>
+                <com-card ng-click="vm.goToTitleMostPopular(2)"
+                 book-title="{{vm.mostPopular[2].title}}"
+                 book-cover="{{vm.mostPopular[2].cover}}"
+                 book-genres="{{vm.mostPopular[2].genres}}"
+                 book-author="{{vm.mostPopular[2].author}}"></com-card>
+              </div>
+            </div>
+            <div flex-gt-md=50 layout-gt-xs="row" layout="column">
+              <div flex layout-fill>
+                <com-card ng-click="vm.goToTitleMostPopular(1)"
+                 book-title="{{vm.mostPopular[1].title}}"
+                 book-cover="{{vm.mostPopular[1].cover}}"
+                 book-genres="{{vm.mostPopular[1].genres}}"
+                 book-author="{{vm.mostPopular[1].author}}"></com-card>
+              </div>
+              <div flex layout-fill>
+                <com-card ng-click="vm.goToTitleMostPopular(0)"
+                 book-title="{{vm.mostPopular[0].title}}"
+                 book-cover="{{vm.mostPopular[0].cover}}"
+                 book-genres="{{vm.mostPopular[0].genres}}"
+                 book-author="{{vm.mostPopular[0].author}}"></com-card>
+              </div>
+            </div>
+            </md-content>
+          </md-content>
         </div>
         <md-card class="right-bar" flex-gt-sm=30 flex=100>
           <md-card-header class="right-bar-header">

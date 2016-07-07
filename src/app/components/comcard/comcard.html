@@ -1,15 +1,14 @@
-<md-card class="comcard">
-  <div class="card-click-area">
+<md-card class="comcard card-click-area" flex md-whiteframe-z2>
   <div class="comcard-image-container">
-    <img class="comcard-image" src="{{ vm.cover }}" />
+    <img class="aspect-ratio" src="assets/images/template.png" />
+    <img class="comcard-image" src="{{ vm.bookCover }}" />
   </div>
-  <md-card-title class="card-title-text black">
-    <div>{{ vm.bookTitle }}</div>
+  <md-card-title class="card-title-text-container">
+    <div class="card-title-text">{{ vm.bookTitle }}</div>
   </md-card-title>
-</div>
 <md-divider></md-divider>
-  <md-card-content>
-    <div class="card-info"> <span class="bold">Genres:</span> {{ vm.genres }} </div>
-    <div class="card-info"> <span class="bold">Author:</span> {{ vm.author }} </div>
+  <md-card-content class="card-content">
+    <div class="card-info"> <span class="bold">Genres:</span> {{ vm.bookGenres }} </div>
+    <div class="card-info"> <span class="bold">Author:</span> {{ vm.bookAuthor }} </div>
   </md-card-content>
 </md-card>
