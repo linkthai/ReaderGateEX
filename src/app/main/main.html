@@ -31,7 +31,8 @@
              layout-gt-md="row" layout="column" layout-align="start center">
             <div flex-gt-md=50 layout-gt-xs="row" layout="column">
               <div flex>
-                <com-card></com-card>
+                <com-card book-title="{{vm.newRelease[3].title}}" ng-click="vm.goToTitle(3)"
+                book-cover="{{vm.newRelease[3].cover}}"></com-card>
               </div>
               <div flex>
                 <com-card></com-card>

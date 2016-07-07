@@ -12,12 +12,15 @@
       templateUrl: 'app/components/comcard/comcard.html',
       controller: ComcardController,
       controllerAs: 'vm',
-      bindToController: true
+      bindToController: true,
+      scope: {
+        bookId: '@bookId'
+      }
 
     }
     return directive;
 
-    function ComcardController() {
+    function ComcardController($scope, $attrs) {
       var vm = this;
 
       vm.id = '';
@@ -25,11 +28,14 @@
       vm.genres = '';
       vm.author = '';
       vm.cover = '';
+      vm.bookTitle = $attrs.bookTitle;
+      vm.cover = $attrs.bookCover;
 
       vm.name = 'Death Note';
       vm.genres = 'Drama, Manga, Mystery, Psychological, Shounen, Supernatural, Tragedy';
       vm.author = 'Ohba Tsugumi, OBATA Takeshi';
       vm.cover = 'assets/images/death-note.jpg';
+
     }
 
   }

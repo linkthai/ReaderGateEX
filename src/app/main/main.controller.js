@@ -6,22 +6,43 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController() {
+  function MainController($scope, $location) {
     var vm = this;
 
     vm.text = '';
     vm.title = '';
     vm.selectItem = selectItem;
-    vm.classAnimation = '';
-
-    // function showToastr(text) {
-    //   toastr.info(text);
-    //   vm.classAnimation = '';
-    // }
+    vm.newRelease = [];
 
     function selectItem(item) {
       vm.title = item.name;
     }
+
+    vm.go = function(path) {
+      $location.path(path);
+    }
+    vm.goToTitle = function(num) {
+      $location.path('/archive/' + vm.newRelease[num].bookId);
+    }
+
+    $scope.getNewRelease = function() {
+      vm.newRelease.length = 0;
+      var database = firebase.database();
+
+      database.ref('series/').limitToLast(4).on('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          var childData = childSnapshot.val();
+          vm.newRelease.push({
+            bookId: childData._bookId,
+            title: childData._title,
+            genres: childData._genres,
+            author: childData._author,
+            cover: childData._cover
+          });
+        });
+      });
+    }
+    $scope.getNewRelease();
 
     vm.menuItems = [{
       name: 'NEW RELEASE',
