@@ -6,47 +6,47 @@
     .controller('ChapterController', ChapterController);
 
   /** @ngInject */
-  function ChapterController($location, $routeParams, $scope, bookService) {
+  function ChapterController($location, $routeParams, $scope, $timeout, bookService) {
     var vm = this;
-    var arr = bookService.getValue();
-    var chapter = arr[0];
-    var book = arr[1];
+    // var arr = bookService.getValue();
+    // var chapter = arr[0];
+    // var book = arr[1];
 
     vm.titleId = $routeParams.param1;
-    vm.vol = $routeParams.param2;
-    vm.chap = $routeParams.param3;
+    vm.chap = $routeParams.param2;
+    vm.name = $routeParams.param3;
 
-    var LocalStorageManager = {
-      setValue: function(key, value) {
-        window.localStorage.setItem(key, JSON.stringify(value));
-      },
-      getValue: function(key) {
-        try {
-          return JSON.parse(window.localStorage.getItem(key));
-        } catch (e) {
+    // var LocalStorageManager = {
+    //   setValue: function(key, value) {
+    //     window.localStorage.setItem(key, JSON.stringify(value));
+    //   },
+    //   getValue: function(key) {
+    //     try {
+    //       return JSON.parse(window.localStorage.getItem(key));
+    //     } catch (e) {
+    //
+    //     }
+    //   }
+    // };
+    //
+    // if (chapter != null && LocalStorageManager.getValue("selectingChapter") == null) {
+    //   LocalStorageManager.setValue("selectingChapter", chapter);
+    // }
+    // else {
+    //   if (chapter == null && LocalStorageManager.getValue("selectingChapter") != null)
+    //     chapter = LocalStorageManager.getValue("selectingChapter");
+    // }
+    //
+    // if (book != null && LocalStorageManager.getValue("selectingSeries") == null) {
+    //   LocalStorageManager.setValue("selectingSeries", book);
+    // }
+    // else {
+    //   if (book == null && LocalStorageManager.getValue("selectingSeries") != null)
+    //     book = LocalStorageManager.getValue("selectingSeries");
+    // }
 
-        }
-      }
-    };
-
-    if (chapter != null && LocalStorageManager.getValue("selectingChapter") == null) {
-      LocalStorageManager.setValue("selectingChapter", chapter);
-    }
-    else {
-      if (chapter == null && LocalStorageManager.getValue("selectingChapter") != null)
-        chapter = LocalStorageManager.getValue("selectingChapter");
-    }
-
-    if (book != null && LocalStorageManager.getValue("selectingSeries") == null) {
-      LocalStorageManager.setValue("selectingSeries", book);
-    }
-    else {
-      if (book == null && LocalStorageManager.getValue("selectingSeries") != null)
-        book = LocalStorageManager.getValue("selectingSeries");
-    }
-
-    console.log(chapter);
-    console.log(book);
+    // console.log(chapter);
+    // console.log(book);
 
     vm.go = function(path) {
       $location.path('archive/' + vm.titleId + '/' + path);
@@ -69,9 +69,10 @@
         });
       });
     }
-    getChaptersBySeries(book._bookId);
+    getChaptersBySeries(vm.titleId);
 
     $scope.chapPages = [];
+
     function findSelectedChapter(seriesId, chapterId) {
       var auth = firebase.auth();
       var databaseRef = firebase.database().ref('pages/' + seriesId + '/' + chapterId);
@@ -103,10 +104,12 @@
         }
 
         $scope.chapPages = $scope.chapPages.sort(naturalCompare);
-        $scope.$apply();
+        $timeout(function () {
+            $scope.$apply();
+        }, 100);
       });
     }
-    findSelectedChapter(book._bookId, chapter._chapterId);
+    findSelectedChapter(vm.titleId , vm.chap);
 
   }
 })();

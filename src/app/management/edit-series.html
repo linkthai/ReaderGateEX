@@ -15,15 +15,15 @@
           <section layout="column" layout-align="space-around stretch">
             <div class="manage-line" layout="row" layout-align="start center">
               <p flex=15 class="manage-text">Title</p>
-              <input class="manage-input" type="text" />
+              <input class="manage-input" type="text" ng-model="_title"/>
             </div>
             <div class="manage-line" layout="row" layout-align="start center">
               <p flex=15 class="manage-text">Author</p>
-              <input class="manage-input" type="text" />
+              <input class="manage-input" type="text" ng-model="_author"/>
             </div>
             <div class="manage-line" layout="row" layout-align="start center">
               <p flex=15 class="manage-text">Genres</p>
-              <input class="manage-input" type="text" />
+              <input class="manage-input" type="text" ng-model="_genres"/>
             </div>
             <div class="manage-line" layout="row" layout-align="start center">
               <p flex=15 class="manage-text">Completed</p>
@@ -31,14 +31,14 @@
             </div>
             <div class="manage-line" layout="row" layout-align="start center">
               <p flex=15 class="manage-text">Description</p>
-              <textarea class="manage-input-area" type="text" rows="10" cols="50"></textarea>
+              <textarea class="manage-input-area" type="text" rows="10" cols="50" ng-model="_description"></textarea>
             </div>
             <div class="manage-line" layout="row" layout-align="start center">
               <p flex=15 class="manage-text">Cover Image</p>
-              <input class="manage-input-file" type="file" ng-file-model="files" multiple />
+              <input class="manage-input-file" type="file" ng-file-model="files"/>
             </div>
 
-            <button ng-click="vm.addSeries()" class="admin-button">
+            <button ng-click="editSeries()" class="admin-button">
               Confirm
             </button>
           </section>
