@@ -9,11 +9,11 @@
       <div class="main-content">
         <div class="length" layout="column" layout-align="space-between center">
           <div class="chapter-navbar" layout="row" layout-align="space-around center">
-            <div class="chapter-icon previous-icon"></div>
-            <select ng-change="vm.changeVol()" ng-model="vm.selectedChapter" class="chapter-select"
-            ng-options="item as (item.name) for item in vm.chapList">
+            <div class="chapter-icon previous-icon" ng-click="goPrev()"></div>
+            <select ng-change="vm.go(vm.selectedChapter.data._chapterId, vm.selectedChapter.name)" ng-model="vm.selectedChapter" class="chapter-select"
+            ng-options="item.name for item in vm.chapList">
             </select>
-            <div class="chapter-icon next-icon"></div>
+            <div class="chapter-icon next-icon" ng-click="goNext()"></div>
           </div>
 
           <div flex=80 class="chapter-pages">
@@ -23,11 +23,11 @@
           </div>
 
           <div class="chapter-navbar" layout="row" layout-align="space-around center">
-            <div class="chapter-icon previous-icon"></div>
-            <select ng-change="vm.changeVol()" ng-model="vm.selectedChapter" class="chapter-select"
-            ng-options="item as (item.name) for item in vm.chapList">
+            <div class="chapter-icon previous-icon" ng-click="goPrev()"></div>
+            <select ng-change="vm.go(vm.selectedChapter.data._chapterId, vm.selectedChapter.name)" ng-model="vm.selectedChapter" class="chapter-select"
+            ng-options="item.name for item in vm.chapList">
             </select>
-            <div class="chapter-icon next-icon"></div>
+            <div class="chapter-icon next-icon" ng-click="goNext()"></div>
           </div>
         </div>
       </div>

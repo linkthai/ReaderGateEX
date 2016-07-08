@@ -88,10 +88,9 @@
       database.ref("latest_update/").limitToLast(30).on("value", function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
           var childData = childSnapshot.val();
-          vm.latestUpdate.push(childData);
+          vm.latestUpdate.splice(0, 0, childData);
         });
       });
-
       (function myLoop(i) {
         setTimeout(function() {
            $scope.$apply();
