@@ -9,11 +9,26 @@
       <div class="main-content">
         <div layout="column" layout-gt-sm="row">
           <div flex=100>
-            <div class="title-name">{{ vm.title }}</div>
+
+            <div class="title-name">
+              {{ vm.title }}
+
+              <button ng-click="vm.editSeries()" ng-show="vm.adminPermission" class="edit-button" ng-click="vm.editSeries()">
+                <md-icon class="search-button icon-aligned"><i class="red material-icons md-12">edit</i></md-icon>
+                Edit info
+              </button>
+            </div>
+
             <md-card layout="column">
               <md-card-content layout-gt-sm="row" layout="column" layout="space-around center">
-                <div flex-lg=35 flex-md=70 flex-sm=80 flex-xs=100>
+                <!-- <div flex-lg=35 flex-md=70 flex-sm=80 flex-xs=100>
                   <img class="title-image" src="{{ vm.cover }}" />
+                </div> -->
+                <div flex-lg=40 flex-md=70 flex-sm=80 flex-xs=100 flex=40 layout="row" class="title-image-container">
+                  <div class="title-image-container" flex=100>
+                    <img class="title-ratio" src="assets/images/template.png" />
+                    <img class="title-image" src="{{ vm.cover }}" />
+                  </div>
                 </div>
                 <md-content class="title-info-wrapper" flex-gt-sm flex=100>
                   <md-divider flex=100 hide-gt-sm></md-divider>
@@ -27,17 +42,6 @@
                 </md-content>
               </md-card-content>
             </md-card>
-
-            <div layout="row" layout-align="start center">
-              <button ng-click="vm.editSeries()" ng-mouseenter="options1=true" ng-mouseleave="options1=false" class="admin-button">
-                <md-icon class="search-button icon-aligned" ng-show="options1"><i class="white material-icons md-12">edit</i></md-icon>
-                Edit series info
-              </button>
-              <button ng-click="vm.addChapter()" ng-mouseenter="options2=true" ng-mouseleave="options2=false" class="admin-button">
-                <md-icon class="search-button icon-aligned" ng-show="options2"><i class="white material-icons md-12">add</i></md-icon>
-                Add new chapter
-              </button>
-            </div>
 
             <md-card class="volume-list" layout="column">
               <md-card-header class="md-padding volume-list-header">
@@ -62,6 +66,15 @@
               <md-divider ng-repeat-end></md-divider>
             </md-card-content>
           </md-card>
+
+
+          <md-button class="md-fab md-fab-bottom-right md-accent fixed-fab" ng-show="vm.adminPermission" ng-click="vm.addChapter()">
+            <md-icon><i class="material-icons md-24 fab-icon-spin">playlist_add</i>
+            </md-icon>
+            <md-tooltip md-direction="left">
+              Add new chapter
+            </md-tooltip>
+          </md-button>
         </div>
       </div>
     </md-content>

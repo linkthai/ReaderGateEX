@@ -18,14 +18,18 @@
     return directive;
 
     /** @ngInject */
-    function FooterBarController($scope, $location, $window) {
+    function FooterBarController($rootScope, $scope, $location, $window) {
       var vm = this;
 
       vm.go = function(path) {
         $location.path('/' + path);
       }
 
-      vm.a = 'sfsf';
+      vm.goToSortArchive = function(index, path) {
+        $rootScope.selectedSortIndex = index;
+        $location.path(path);
+        $window.scrollTo(0, 0);
+      }
     }
   }
 

@@ -15,19 +15,21 @@
           <section layout="column" layout-align="space-around stretch">
             <div class="manage-line" layout="row" layout-align="start center">
               <p flex=15 class="manage-text">Title</p>
-              <input class="manage-input" type="text" ng-model="_title"/>
+              <input class="manage-input" type="text" ng-model="_title" />
             </div>
             <div class="manage-line" layout="row" layout-align="start center">
               <p flex=15 class="manage-text">Author</p>
-              <input class="manage-input" type="text" ng-model="_author"/>
+              <input class="manage-input" type="text" ng-model="_author" />
             </div>
             <div class="manage-line" layout="row" layout-align="start center">
               <p flex=15 class="manage-text">Genres</p>
-              <input class="manage-input" type="text" ng-model="_genres"/>
+              <input class="manage-input" type="text" ng-model="_genres" />
             </div>
             <div class="manage-line" layout="row" layout-align="start center">
               <p flex=15 class="manage-text">Completed</p>
-              <md-checkbox flex class="status-box" ng-model="isCompleted"/>
+              <div class="status-box-wrapper" flex>
+                <md-checkbox class="status-box" ng-model="isCompleted" />
+              </div>
             </div>
             <div class="manage-line" layout="row" layout-align="start center">
               <p flex=15 class="manage-text">Description</p>
@@ -35,7 +37,7 @@
             </div>
             <div class="manage-line" layout="row" layout-align="start center">
               <p flex=15 class="manage-text">Cover Image</p>
-              <input class="manage-input-file" type="file" ng-file-model="files"/>
+              <input class="manage-input-file" type="file" ng-file-model="files" />
             </div>
 
             <button ng-click="editSeries()" class="admin-button">

@@ -1,55 +1,40 @@
 <div layout="vertical" layout-fill>
 
-  <md-content flex>
+  <md-content flex class="body">
     <header>
       <nav-bar md-whiteframe-z2></nav-bar>
     </header>
 
-    <div class="bg-grey body">
-      <p>Create Series</p>
-      <p>Genres: </p>
-      <input type="text" ng-model="_genres" />
-      <p>Author: </p>
-      <input type="text" ng-model="_author" />
-      <p>Status: </p>
-      <input type="text" ng-model="_status" />
-      <p>Description: </p>
-      <input type="text" ng-model="_description" />
-      <p>Views: </p>
-      <input type="text" ng-model="_views" />
-      <p>Book: </p>
-      <input type="text" ng-model="_book" />
-      <button ng-click="createSeries()">Create</button>
-      <button ng-click="createSeries()">Update</button>
-      <p>Chapter: </p>
-      <input type="text" ng-model="_chapter" />
-      <p>Chapter name: </p>
-      <input type="text" ng-model="_chapterName" />
-      <br>
-      <br>
-      <input type="file" ng-file-model="files" multiple />
-      <button type="button" ng-click="upload()">Upload</button>
+    <md-content class="mid-content" data-ng-controller="ContactController as vm">
+      <div class="main-content">
+        <div class="length" layout-align="space-between center">
 
-      <p ng-repeat="file in files">
-        {{file.name}}
-      </p>
+          <h1 class="cyan">About</h1>
+          <md-divider class="bg-cyan max-width"></md-divider>
 
-      <button type="button" ng-click="getAllSeries()">Get series</button>
-      <p ng-repeat="info in seriesInfo">
-        {{info._name}}
-      </p>
+          <section flex class="profile-section">
+            <p class="profile-header red">Contact</p>
+            <div flex layout="column" class="profile-content">
+              <p flex layout="row"><span flex=20 class="bold black">Tel:</span> <span> (+84)942654141 </span> </p>
+              <p flex layout="row"><span flex=20 class="bold black">Email:</span> <span> ReaderGate@gmail.com <span></p>
+              <p flex layout="row"><span flex=20 class="bold black">Twitter:</span> <span> twitter.com/readergate  <span> </p>
+            </div>
+          </section>
 
-      <button type="button" ng-click="getChaptersBySeries('-KLj5z74EOTRqmAJLkmI')">Get chapters</button>
-      <p ng-repeat="info in chaptersInfo">
-        {{info._chapterId}}
-      </p>
+          <md-divider class="max-width"></md-divider>
 
-      <button type="button" ng-click="getPagesByChapter('-KLj5z74EOTRqmAJLkmI', 'C1')">Get pages</button>
-      <p ng-repeat="page in pages">
-        <img src= {{page}} height="1400">
-      </p>
-    </div>
+          <section flex class="profile-section">
+            <p class="profile-header red">Creators</p>
+            <div flex layout="column" class="profile-content">
+              <p flex layout="row"><span flex=20 class="bold black">1312235</span> <span> La Ngọc Huyền </span> </p>
+              <p flex layout="row"><span flex=20 class="bold black">1312328</span> <span> Thái Viêt Linh <span></p>
+              <p flex layout="row"><span flex=20 class="bold black">1312333</span> <span> Hà Mộng Long  <span> </p>
+            </div>
+          </section>
 
+        </div>
+      </div>
+    </md-content>
   </md-content>
 
 </div>

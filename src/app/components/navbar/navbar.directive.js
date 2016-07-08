@@ -18,14 +18,30 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController($scope, $rootScope, $location, $window) {
+    function NavbarController($route, $scope, $rootScope, $location, $window) {
       var vm = this;
       vm.navItems = [];
       $scope.signIn = false;
       $scope.user;
       $scope.userInfo = [];
       vm.displayName = '';
-      vm.search = '';
+      vm.selectedTab = "";
+
+      vm.checkRoute = function() {
+        if ($window.location.href.indexOf('archive') > -1) {
+          vm.selectedTab = "Archive";
+        } else if ($window.location.href.indexOf('about') > -1) {
+          vm.selectedTab = "About";
+        } else if ($window.location.href.indexOf('login') > -1) {
+          vm.selectedTab = "Login";
+        } else if ($window.location.href.indexOf('register') > -1) {
+          vm.selectedTab = "Register";
+        } else {
+          vm.selectedTab = "";
+        }
+      }
+
+      vm.checkRoute();
 
       vm.navItems = [{
         name: 'Home',
@@ -36,9 +52,9 @@
         icon: 'grade',
         href: 'archive'
       }, {
-        name: 'Contact',
+        name: 'About',
         icon: 'grade',
-        href: 'contact'
+        href: 'about'
       }];
 
       $scope.getInfo = function(uid) {
@@ -76,11 +92,11 @@
         });
       };
 
-      vm.goSearchQuery = function () {
-        $location.path('/search/' + vm.search)
+      vm.goSearchQuery = function() {
+        $lo
       }
 
-      vm.goSearch = function () {
+      vm.goSearch = function() {
         $location.path('/search');
       }
 

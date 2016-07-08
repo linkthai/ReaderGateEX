@@ -136,6 +136,22 @@ md-sidenav.md-locked-open.md-sidenav-left {
   font-size: 22px;
   color: var(--primary-color-4);
   padding-left: 10px;
+  transition: color 1s ease-out;
+  outline: none;
+}
+.header-text:hover {
+  cursor: pointer;
+  cursor: hand;
+  color: var(--primary-color-3);
+}
+.header-text:hover .fab-icon-spin {
+  -webkit-transform: rotateZ(360deg);
+  -moz-transform: rotateZ(360deg);
+  transform: rotateZ(360deg);
+}
+.header-text:hover .right-bar-icon {
+  opacity: 100;
+  margin-left: 5px;
 }
 .list-section {
   margin: 5px;
@@ -159,15 +175,31 @@ md-sidenav.md-locked-open.md-sidenav-left {
 .right-bar-header {
   background-color: var(--secondary-color);
   color: white;
+  margin-bottom: -15px;
 }
 .right-bar-text {
   font-size: 18px;
   padding: 10px;
   cursor: pointer;
   cursor: hand;
-
-  margin-left: -15px;
+  margin-left: -20px;
   padding-left: 0px;
+}
+.right-bar-text:hover {
+}
+.right-bar-text:hover .right-bar-icon {
+  opacity: 100;
+}
+.right-bar-text:hover .right-bar-chapter {
+  color: var(--secondary-color-2);
+}
+.right-bar-text:hover .right-bar-name {
+  padding-left: 20px;
+}
+.right-bar-name {
+  margin-left: -10px;
+  font-weight: bold;
+  color: var(--secondary-color);
   transition: padding-left 0.5s linear;
   /* vendorless fallback */
   -o-transition: padding-left 0.5s linear;
@@ -179,31 +211,27 @@ md-sidenav.md-locked-open.md-sidenav-left {
   -webkit-transition: padding-left 0.5s linear;
   /*safari and chrome */
 }
-.right-bar-text:hover {
-  padding-left: 10px;
-}
-.right-bar-text:hover .right-bar-icon {
-  opacity: 100;
-}
-.right-bar-name {
-  font-weight: bold;
-  color: var(--secondary-color);
-}
 .right-bar-icon {
+  margin: 0px;
+  padding: 0px;
   opacity: 0;
 
-  transition: opacity 0.5s linear;
+  transition: opacity 0.7s ease-out, margin-left 0.7s ease-out;
   /* vendorless fallback */
-  -o-transition: opacity 0.5s linear;
+  -o-transition: opacity 0.7s ease-out, margin-left 0.7s ease-out;
   /* opera */
-  -ms-transition: opacity 0.5s linear;
+  -ms-transition: opacity 0.7s ease-out, margin-left 0.7s ease-out;
   /* IE 10 */
-  -moz-transition: opacity 0.5s linear;
+  -moz-transition: opacity 0.7s ease-out, margin-left 0.7s ease-out;
   /* Firefox */
-  -webkit-transition: opacity 0.5s linear;
+  -webkit-transition: opacity 0.7s ease-out, margin-left 0.7s ease-out;
   /*safari and chrome */
 }
-.right-bar-icon:hover {}
+.right-bar-chapter {
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: color 0.5s linear;
+}
 .com-card-wrapper {
   height: 100%;
 }
@@ -265,6 +293,14 @@ md-sidenav.md-locked-open.md-sidenav-left {
 .alphabet-button:hover {
   color: var(--secondary-color);
 }
+.longtext-button {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.longtext-container {
+  max-width: 600px;
+  ;
+}
 .alphabet-button-active {
   color: white;
   background-color: var(--secondary-color);
@@ -276,8 +312,8 @@ md-sidenav.md-locked-open.md-sidenav-left {
 .alphabet-container {
   width: 90%;
   margin: auto;
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 .table-header {
   color: var(--black);
@@ -356,9 +392,33 @@ md-sidenav.md-locked-open.md-sidenav-left {
 .title-wrapper {
   max-width: 900px;
 }
-.title-image {
+.title-image-container {
   width: 100%;
   height: 100%;
+  position: relative;
+}
+.title-ratio {
+  width: 100%;
+  height: auto;
+}
+.title-image {
+  position: absolute;
+  width: 100%;
+  height: inherit;
+  top: 0; left: 0;
+}
+.edit-button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: var(--secondary-color);
+  transition: 1s ease-out;
+  font-size: 18px;
+  font-style: italic;
+}
+.edit-button:hover {
+  color: var(--secondary-color-10);
+  margin-left: 10px;
 }
 .volume-list {
   min-height: 500px;
@@ -473,13 +533,13 @@ md-sidenav.md-locked-open.md-sidenav-left {
 .profile-section {
   margin: auto;
   max-width: 1000px;
+  padding-bottom: 20px;
 }
 .max-width {
   margin: auto;
   max-width: 1000px;
 }
 .profile-header {
-  color: var(--black);
   font-size: 20px;
   font-weight: bold;
 }
@@ -504,6 +564,9 @@ md-sidenav.md-locked-open.md-sidenav-left {
 }
 .icon-aligned {
   padding-bottom: 3px;
+}
+.main-icon-aligned {
+  margin-bottom: 5px;
 }
 .manage-line {
   margin-left: 30px;
@@ -542,9 +605,11 @@ md-sidenav.md-locked-open.md-sidenav-left {
   height: 40px;
   padding: 5px;
 }
+.status-box-wrapper {
+  margin-left: 30px;
+  margin-top: 15px;
+}
 .status-box {
-  background-color: red;
-  margin-left: 200px;
 }
 .search-content {
   margin: auto;
@@ -566,4 +631,21 @@ md-sidenav.md-locked-open.md-sidenav-left {
 .result-number {
   font-style: italic;
   color: var(--secondary-color-3);
+}
+.md-button.md-fab.md-fab-bottom-right {
+  top: auto;
+  right: 20px;
+  bottom: 20px;
+  left: auto;
+  position: fixed;
+}
+.fab-icon-spin {
+    -webkit-transition: 1s ease-out;
+    -moz-transition:  1s ease-out;
+    transition:  1s ease-out;
+}
+.md-fab:hover .fab-icon-spin {
+  -webkit-transform: rotateZ(360deg);
+  -moz-transform: rotateZ(360deg);
+  transform: rotateZ(360deg);
 }

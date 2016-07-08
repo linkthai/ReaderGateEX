@@ -27,7 +27,7 @@
         controller: 'ChapterController',
         controllerAs: 'vm'
       })
-      .when('/contact', {
+      .when('/about', {
         templateUrl: 'app/contact/contact.html',
         controller: 'ContactController',
         controllerAs: 'vm'
@@ -76,10 +76,10 @@
         templateUrl: 'app/search/search.html',
         controller: 'SearchController',
         controllerAs: 'vm'
+      })
+      .otherwise({
+        redirectTo: '/'
       });
-      // .otherwise({
-      //   redirectTo: '/'
-      // });
   }
 
 })();

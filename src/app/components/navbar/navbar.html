@@ -7,7 +7,7 @@
     </md-content>
 
     <div class="menu-bar" layout="row" flex-gt-xs=40 flex-xs layout-align="start center">
-      <button class="menu-button" ng-repeat="item in vm.navItems" ng-click="vm.go(item.href)">
+      <button class="menu-button" ng-repeat="item in vm.navItems" ng-click="vm.go(item.href)" ng-class="{'menu-button-active': vm.selectedTab === item.name}">
         {{ item.name }}
       </button>
     </div>
@@ -27,8 +27,8 @@
       {{vm.displayName}}
     </button>
     <button class="menu-button" ng-show="signIn" ng-click="vm.logOut()">Logout</button>
-      <button class="menu-button" ng-show="!signIn" ng-click="vm.go('login')">Login</button>
-      <button class="menu-button" ng-show="!signIn" ng-click="vm.go('register')">Register</button>
+      <button class="menu-button" ng-show="!signIn" ng-click="vm.go('login')" ng-class="{'menu-button-active': vm.selectedTab === 'Login'}">Login</button>
+      <button class="menu-button" ng-show="!signIn" ng-click="vm.go('register')" ng-class="{'menu-button-active': vm.selectedTab === 'Register'}">Register</button>
     </div>
   </div>
   <div flex-gt-sm=5></div>

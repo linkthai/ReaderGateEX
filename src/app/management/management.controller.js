@@ -77,8 +77,7 @@
 
     if (selectingSeries != null) {
       LocalStorageManager.setValue("selectingSeries", selectingSeries);
-    }
-    else {
+    } else {
       if (LocalStorageManager.getValue("selectingSeries") != null)
         selectingSeries = LocalStorageManager.getValue("selectingSeries");
     }
@@ -88,8 +87,8 @@
     vm.flag = false;
     $scope.editSeries = function() {
       vm.flag = true;
-      $timeout(function () {
-          $scope.addSeries();
+      $timeout(function() {
+        $scope.addSeries();
       }, 10);
     }
 
@@ -105,8 +104,7 @@
       var stt;
       if ($scope.isComplete == true) {
         stt = "Completed";
-      }
-      else {
+      } else {
         stt = "Ongoing";
       }
 
@@ -172,8 +170,8 @@
       if (!vm.flag)
         $scope.bookId = $scope.addInfo();
       else {
-          $scope.bookId = $scope.updateInfo();
-          vm.flag = false;
+        $scope.bookId = $scope.updateInfo();
+        vm.flag = false;
       }
 
       var bookId = $scope.bookId;
@@ -234,11 +232,11 @@
           var database = firebase.database();
 
           database.ref('series/' + $scope.bookId).on('value', function(snapshot) {
-              var postData = snapshot.val();
-              postData._cover = downloadURL;
-              var updates = {};
-              updates['/series/' + $scope.bookId] = postData;
-              database.ref().update(updates);
+            var postData = snapshot.val();
+            postData._cover = downloadURL;
+            var updates = {};
+            updates['/series/' + $scope.bookId] = postData;
+            database.ref().update(updates);
           });
         });
     };
@@ -275,10 +273,10 @@
       });
 
       database.ref('latest_update/').push({
-        "_bookId" : bookId,
-        "_title" : vm.seriesName,
-        "_chapterId" : chapterId,
-        "_chapterName" : chapterName
+        "_bookId": bookId,
+        "_title": vm.seriesName,
+        "_chapterId": chapterId,
+        "_chapterName": chapterName
       });
 
       angular.forEach(files, function(value, key) {
@@ -331,6 +329,7 @@
 
     //Get latest updates function, limit to 30 last childs
     vm.latest = [];
+
     function getLatestUpdate() {
       var auth = firebase.auth();
       var database = firebase.database();
@@ -343,6 +342,32 @@
       });
     }
     getLatestUpdate();
+
+    $scope.checkAdminPermission = function(uid) {
+      var database = firebase.database();
+
+      database.ref('users/' + uid).on('value', function(snapshot) {
+        vm.adminPermission = snapshot.val().admin;
+      });
+      $scope.$apply();
+
+      if (vm.adminPermission === false) {
+        $location.path('/');
+      }
+    }
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        $scope.checkAdminPermission(user.uid);
+
+      } else {
+        // No user is signed in.
+        $location.path('/');
+
+        $scope.$apply();
+      }
+    });
 
   }
 })();

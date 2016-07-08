@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($scope, $location) {
+  function MainController($rootScope, $scope, $location) {
     var vm = this;
 
     vm.text = '';
@@ -19,7 +19,8 @@
       vm.title = item.name;
     }
 
-    vm.go = function(path) {
+    vm.goToSortArchive = function(index, path) {
+      $rootScope.selectedSortIndex = index;
       $location.path(path);
     }
 

@@ -95,5 +95,33 @@
       });
     }
     getChaptersBySeries(vm.titleId);
+
+    $scope.checkAdminPermission = function(uid) {
+      var database = firebase.database();
+
+      database.ref('users/' + uid).on('value', function(snapshot) {
+        vm.adminPermission = snapshot.val().admin;
+      });
+      (function myLoop(i) {
+        setTimeout(function() {
+           $scope.$apply();//  your code here
+          if (--i) myLoop(i) //  decrement i and call myLoop again if i > 0
+        }, 50)
+      })(100);
+    }
+
+    vm.adminPermission = false;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        $scope.checkAdminPermission(user.uid);
+
+      } else {
+        // No user is signed in.
+        vm.adminPermission = false;
+
+        $scope.$apply();
+      }
+    });
   }
 })();

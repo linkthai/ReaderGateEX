@@ -56,6 +56,9 @@
   color: white;
   animation: menu-button-animation 1s;
 }
+.menu-button-active {
+  border-bottom: 6px solid #4DD0E1;
+}
 #search-box {
   height: 35px;
   font-size: 18px;

@@ -49,7 +49,7 @@
            $scope.$apply();//  your code here
           if (--i) myLoop(i) //  decrement i and call myLoop again if i > 0
         }, 50)
-      })(200);
+      })(100);
     }
 
     vm.goToTitle = function(bookId) {
