@@ -19,14 +19,14 @@
         return this[--this.current];
     };
 
-    $scope.goPrev = function() {
+    vm.goPrev = function() {
       if (vm.selectedChapter.pos - 1 >= 0) {
         vm.selectedChapter = vm.chapList[vm.selectedChapter.pos - 1];
         $location.path('/archive/' + vm.titleId + '/' + vm.selectedChapter.data._chapterId + '/' + vm.selectedChapter.name);
       }
     }
 
-    $scope.goNext = function() {
+    vm.goNext = function() {
       if (vm.selectedChapter.pos + 1 < vm.chapList.length) {
         vm.selectedChapter = vm.chapList[vm.selectedChapter.pos + 1];
         $location.path('/archive/' + vm.titleId + '/' + vm.selectedChapter.data._chapterId + '/' + vm.selectedChapter.name);

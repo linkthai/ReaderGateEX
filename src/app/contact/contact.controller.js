@@ -6,7 +6,7 @@
     .controller('ContactController', ContactController);
 
   /** @ngInject */
-  function ContactController($scope) {
+  function ContactController() {
 
   }
 })();

@@ -102,5 +102,23 @@
     $scope.getNewRelease();
     $scope.getMostPopular();
     $scope.getLatestUpdate();
+
+    vm.go = function(seriesId, chap, name) {
+      vm.increaseViews(seriesId);
+      $location.path('/archive/' + seriesId + '/' + chap + '/' + name);
+    };
+
+    vm.increaseViews = function(seriesId) {
+      var auth = firebase.auth();
+      var database = firebase.database();
+
+      database.ref('series/' + seriesId).once('value', function(snapshot) {
+          var postData = snapshot.val();
+          postData._views = postData._views + 1;
+          var updates = {};
+          updates['/series/' + seriesId] = postData;
+          database.ref().update(updates);
+      });
+    }
   }
 })();
