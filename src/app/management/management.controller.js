@@ -123,7 +123,7 @@
       updates['/series/' + $routeParams.param1] = postData;
       database.ref().update(updates);
 
-      alert("New series successfully added");
+      alert("Series successfully updated");
       return $routeParams.param1;
     }
 
@@ -166,7 +166,6 @@
       var files = $scope.files;
       var title = $scope._title;
 
-      alert(vm.flag);
       if (!vm.flag)
         $scope.bookId = $scope.addInfo();
       else {
