@@ -12,21 +12,23 @@
       templateUrl: 'app/components/comcard/comcard.html',
       controller: ComcardController,
       controllerAs: 'vm',
-      bindToController: true,
       scope: {
-        bookGenres: '@bookGenres',
-        bookTitle: '@bookTitle',
-        bookCover: '@bookCover',
-        bookAuthor: '@bookAuthor'
+        bookGenres: "@",
+        bookTitle: "@",
+        bookCover: "@",
+        bookAuthor: "@"
+      },
+      bindToController: {
+        bookGenres: "@",
+        bookTitle: "@",
+        bookCover: "@",
+        bookAuthor: "@"
       }
     }
     return directive;
 
-    function ComcardController($scope, $attrs) {
+    function ComcardController() {
       var vm = this;
-
-      vm.bookCover = 'assets/images/death-note.jpg';
-
     }
 
   }
