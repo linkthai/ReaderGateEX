@@ -1,73 +1,89 @@
 (function() {
-  'use strict';
+    'use strict';
 
-  angular
-    .module('readerGate')
-    .controller('ChapterController', ChapterController);
+    angular
+      .module('readerGate')
+      .controller('ChapterController', ChapterController);
 
-  /** @ngInject */
-  function ChapterController($location, $routeParams, $scope, $timeout, bookService) {
-    var vm = this;
+    /** @ngInject */
+    function ChapterController($location, $routeParams, $scope, $timeout, bookService) {
+      var vm = this;
+      vm.isFirst = false;
+      vm.isLast = false;
 
-    Array.prototype.next = function() {
+      Array.prototype.next = function() {
         if (!((this.current + 1) in this)) return false;
         return this[++this.current];
-    };
+      };
 
-    Array.prototype.prev = function() {
+      Array.prototype.prev = function() {
         if (!((this.current - 1) in this)) return false;
         return this[--this.current];
-    };
+      };
 
-    vm.goPrev = function() {
-      if (vm.selectedChapter.pos - 1 >= 0) {
-        vm.selectedChapter = vm.chapList[vm.selectedChapter.pos - 1];
-        $location.path('/archive/' + vm.titleId + '/' + vm.selectedChapter.data._chapterId + '/' + vm.selectedChapter.name);
+      vm.goPrev = function() {
+        if (vm.selectedChapter.pos - 1 >= 0) {
+          vm.selectedChapter = vm.chapList[vm.selectedChapter.pos - 1];
+          $location.path('/archive/' + vm.titleId + '/' + vm.selectedChapter.data._chapterId + '/' + vm.selectedChapter.name);
+        }
       }
-    }
 
-    vm.goNext = function() {
-      if (vm.selectedChapter.pos + 1 < vm.chapList.length) {
-        vm.selectedChapter = vm.chapList[vm.selectedChapter.pos + 1];
-        $location.path('/archive/' + vm.titleId + '/' + vm.selectedChapter.data._chapterId + '/' + vm.selectedChapter.name);
+      vm.goNext = function() {
+        if (vm.selectedChapter.pos + 1 < vm.chapList.length) {
+          vm.selectedChapter = vm.chapList[vm.selectedChapter.pos + 1];
+          $location.path('/archive/' + vm.titleId + '/' + vm.selectedChapter.data._chapterId + '/' + vm.selectedChapter.name);
+        }
       }
-    }
 
-    vm.titleId = $routeParams.param1;
-    vm.chap = $routeParams.param2;
-    vm.name = $routeParams.param3;
+      vm.titleId = $routeParams.param1;
+      vm.chap = $routeParams.param2;
+      vm.name = $routeParams.param3;
 
-    $scope.$on('$viewContentLoaded', function () {
-           window.scrollTo(0, 0);
-         });
-
-    vm.go = function(chap, name) {
-      $location.path('/archive/' + vm.titleId + '/' + chap + '/' + name);
-    };
-
-    vm.chapList = new Array();
-    vm.selectedChapter;
-    function getChaptersBySeries(seriesId) {
-      var auth = firebase.auth();
-      var database = firebase.database();
-
-      var idx = 0;
-      database.ref('chapters/' + seriesId).on('value', function(snapshot) {
-        snapshot.forEach(function(childSnapshot) {
-          var childData = childSnapshot.val();
-          var optionMap = {
-            data: childData,
-            pos: idx,
-            name: childData._name
-          }
-          if (childData._chapterId == vm.chap)
-            vm.selectedChapter = optionMap;
-          vm.chapList.push(optionMap);
-          idx++;
-        });
+      $scope.$on('$viewContentLoaded', function() {
+        window.scrollTo(0, 0);
       });
+
+      vm.go = function(chap, name) {
+        $location.path('/archive/' + vm.titleId + '/' + chap + '/' + name);
+      };
+
+      vm.chapList = new Array();
+      vm.selectedChapter;
+
+      function getChaptersBySeries(seriesId) {
+        var auth = firebase.auth();
+        var database = firebase.database();
+
+        var idx = 0;
+        database.ref('chapters/' + seriesId).on('value', function(snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+            var childData = childSnapshot.val();
+            var optionMap = {
+              data: childData,
+              pos: idx,
+              name: childData._name
+            }
+            if (childData._chapterId == vm.chap)
+              vm.selectedChapter = optionMap;
+            vm.chapList.push(optionMap);
+            idx++;
+          });
+        });
+
+          setTimeout(function() {
+            var index = vm.chapList.indexOf(vm.selectedChapter);
+            if (index === 0)
+              vm.isFirst = true;
+
+            if (index === vm.chapList.length - 1)
+              vm.isLast = true;
+            console.log(index);
+            $scope.$apply();
+          }, 1);
     }
     getChaptersBySeries(vm.titleId);
+
+
 
     $scope.chapPages = [];
 
@@ -102,12 +118,12 @@
         }
 
         $scope.chapPages = $scope.chapPages.sort(naturalCompare);
-        $timeout(function () {
-            $scope.$apply();
+        $timeout(function() {
+          $scope.$apply();
         }, 100);
       });
     }
-    findSelectedChapter(vm.titleId , vm.chap);
+    findSelectedChapter(vm.titleId, vm.chap);
 
   }
 })();

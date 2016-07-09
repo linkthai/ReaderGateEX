@@ -10,9 +10,13 @@
       var vm = this;
       vm.comicList = [];
 
+      $scope.$on('$viewContentLoaded', function() {
+        window.scrollTo(0, 0);
+      });
+
       if ($rootScope.selectedSortIndex == null)
         $rootScope.selectedSortIndex = 0;
-        
+
       vm.sortType = [{
         type: 'Sort By Name'
       }, {

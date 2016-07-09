@@ -45,6 +45,10 @@
 
     $scope.files = [];
 
+    $scope.$on('$viewContentLoaded', function() {
+      window.scrollTo(0, 0);
+    });
+
     vm.menuItems = [{
       name: "Infomation",
       icon: "people"

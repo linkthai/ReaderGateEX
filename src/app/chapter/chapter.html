@@ -9,24 +9,26 @@
       <div class="main-content">
         <div class="length" layout="column" layout-align="space-between center">
           <div class="chapter-navbar" layout="row" layout-align="space-around center">
-            <div class="chapter-icon previous-icon" ng-click="vm.goPrev()"></div>
-            <select ng-change="vm.go(vm.selectedChapter.data._chapterId, vm.selectedChapter.name)" ng-model="vm.selectedChapter" class="chapter-select"
-            ng-options="item.name for item in vm.chapList">
+            <div ng-show="vm.isFirst" class="chapter-icon"></div>
+            <div ng-show="!vm.isFirst" class="chapter-icon previous-icon" ng-click="vm.goPrev()"></div>
+            <select ng-change="vm.go(vm.selectedChapter.data._chapterId, vm.selectedChapter.name)" ng-model="vm.selectedChapter" class="chapter-select" ng-options="item.name for item in vm.chapList">
             </select>
-            <div class="chapter-icon next-icon" ng-click="vm.goNext()"></div>
+            <div ng-show="vm.isLast" class="chapter-icon"></div>
+            <div ng-show="!vm.isLast" class="chapter-icon next-icon" ng-click="vm.goNext()"></div>
           </div>
 
           <div class="chapter-pages">
             <div flex ng-repeat="page in chapPages">
-              <img class="chapter-page" src= {{page}}/>
+              <img class="chapter-page" src={{page}}/>
             </div>
           </div>
 
           <div class="chapter-navbar" layout="row" layout-align="space-around center">
-            <div class="chapter-icon previous-icon" ng-click="vm.goPrev()"></div>
-            <select ng-change="vm.go(vm.selectedChapter.data._chapterId, vm.selectedChapter.name)" ng-model="vm.selectedChapter" class="chapter-select"
-            ng-options="item.name for item in vm.chapList">
+            <div ng-show="vm.isFirst" class="chapter-icon"></div>
+            <div ng-show="!vm.isFirst" class="chapter-icon previous-icon" ng-click="vm.goPrev()"></div>
+            <select ng-change="vm.go(vm.selectedChapter.data._chapterId, vm.selectedChapter.name)" ng-model="vm.selectedChapter" class="chapter-select" ng-options="item.name for item in vm.chapList">
             </select>
+            <div ng-show="vm.isLast" class="chapter-icon"></div>
             <div class="chapter-icon next-icon" ng-click="vm.goNext()"></div>
           </div>
         </div>

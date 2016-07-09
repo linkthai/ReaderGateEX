@@ -17,6 +17,10 @@
     vm.info = [];
     vm.count = '';
 
+    $scope.$on('$viewContentLoaded', function() {
+      window.scrollTo(0, 0);
+    });
+
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.

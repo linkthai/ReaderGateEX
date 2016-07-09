@@ -13,6 +13,10 @@
     vm.nextEnabled = true;
     vm.previousEnabled = true;
 
+    $scope.$on('$viewContentLoaded', function() {
+      window.scrollTo(0, 0);
+    });
+
     vm.go = function(chap, name) {
       vm.increaseViews();
       $location.path('/archive/' + vm.titleId + '/' + chap + '/' + name);

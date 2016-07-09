@@ -14,6 +14,10 @@
     vm.email = "";
     vm.password = "";
 
+    $scope.$on('$viewContentLoaded', function() {
+      window.scrollTo(0, 0);
+    });
+
     vm.handleLogin = function() {
       firebase.auth().signInWithEmailAndPassword(vm.email, vm.password)
         .then(function() {

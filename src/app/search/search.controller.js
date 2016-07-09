@@ -13,6 +13,10 @@
     vm.comicList = [];
     vm.comicListResult = [];
 
+    $scope.$on('$viewContentLoaded', function() {
+      window.scrollTo(0, 0);
+    });
+
     vm.searchPressed = function() {
 
       $location.path('/search/' + vm.searchString);

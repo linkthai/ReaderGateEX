@@ -18,6 +18,10 @@
     var database = firebase.database();
     var newUser;
 
+    $scope.$on('$viewContentLoaded', function() {
+      window.scrollTo(0, 0);
+    });
+
     vm.handleSignUp = function() {
       if (vm.email.length < 4) {
         vm.message = 'Please enter a valid email address.';

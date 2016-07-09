@@ -15,6 +15,10 @@
     vm.mostPopular = [];
     vm.latestUpdate = [];
 
+    $scope.$on('$viewContentLoaded', function() {
+      window.scrollTo(0, 0);
+    });
+
     function selectItem(item) {
       vm.title = item.name;
     }
