@@ -23,11 +23,11 @@
           </div>
 
           <div class="chapter-navbar" layout="row" layout-align="space-around center">
-            <div class="chapter-icon previous-icon" ng-click="goPrev()"></div>
+            <div class="chapter-icon previous-icon" ng-click="vm.goPrev()"></div>
             <select ng-change="vm.go(vm.selectedChapter.data._chapterId, vm.selectedChapter.name)" ng-model="vm.selectedChapter" class="chapter-select"
             ng-options="item.name for item in vm.chapList">
             </select>
-            <div class="chapter-icon next-icon" ng-click="goNext()"></div>
+            <div class="chapter-icon next-icon" ng-click="vm.goNext()"></div>
           </div>
         </div>
       </div>

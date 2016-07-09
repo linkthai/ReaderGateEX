@@ -70,7 +70,7 @@
           vm.cover = $scope.bookData._cover;
           vm.description = $scope.bookData._description;
           vm.status = $scope.bookData._status;
-          vm.views = $scope.bookData._view;
+          vm.views = $scope.bookData._views;
         });
     }
     getSeriesById(vm.titleId);
