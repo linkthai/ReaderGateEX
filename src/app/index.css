@@ -184,6 +184,7 @@ md-sidenav.md-locked-open.md-sidenav-left {
   cursor: hand;
   margin-left: -20px;
   padding-left: 0px;
+  outline: none;
 }
 .right-bar-text:hover {
 }
@@ -456,6 +457,7 @@ md-sidenav.md-locked-open.md-sidenav-left {
   height: 50px;
   cursor: hand;
   cursor: pointer;
+  outline: none;
 }
 .previous-icon {
   background-image: url("../assets/images/previous.png");
@@ -470,14 +472,16 @@ md-sidenav.md-locked-open.md-sidenav-left {
   background-image: url('../assets/images/next-active.png');
 }
 .chapter-pages {
-  margin-top: 30px;
-  margin-bottom: 30px;
-  max-width: 1280px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   min-height: 800px;
+  max-width: 1280px;
+  width: 100%;
 }
 .chapter-page {
   width: 100%;
-  height: 100%;
+  margin: auto;
+  height: auto;
 }
 .errorvalidation {
   margin-left: 20px;

@@ -93,7 +93,7 @@
       };
 
       vm.goSearchQuery = function() {
-        $lo
+        $location.path('/search/' + vm.search);
       }
 
       vm.goSearch = function() {
