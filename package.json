@@ -1,7 +1,9 @@
 {
   "name": "readerGate",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "headroom.js": "^0.9.3"
+  },
   "scripts": {
     "test": "gulp test"
   },

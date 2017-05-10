@@ -2,80 +2,84 @@
 <html ng-app="readerGate">
 
 <head>
-  <meta charset="utf-8">
-  <title>Reader Gate</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
-  <base href="/"/>
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <meta charset="utf-8">
+    <title>Reader Gate</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <base href="/" />
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-<!--  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">-->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.min.css">
+    <!--  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.min.css">
 
-  <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
-  <!-- bower:css -->
-  <!-- run `gulp inject` to automatically populate bower styles dependencies -->
-  <!-- endbower -->
-  <!-- endbuild -->
+    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
 
-  <!-- build:css({.tmp/serve,src}) styles/app.css -->
-  <!-- inject:css -->
-  <!-- css files will be automatically insert here -->
-  <!-- endinject -->
-  <!-- endbuild -->
+    <!-- build:css({.tmp/serve,src}) styles/app.css -->
+    <!-- inject:css -->
+    <!-- css files will be automatically insert here -->
+    <!-- endinject -->
+    <!-- endbuild -->
 </head>
 
 <body>
-  <!--[if lt IE 10]>
+    <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-  <script src="https://www.gstatic.com/firebasejs/3.0.5/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/3.0.5/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/3.0.5/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.0.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.0.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.0.5/firebase-database.js"></script>
 
-  <!-- Leave out Storage -->
-  <script src="https://www.gstatic.com/firebasejs/3.0.5/firebase-storage.js"></script>
+    <!-- Leave out Storage -->
+    <script src="https://www.gstatic.com/firebasejs/3.0.5/firebase-storage.js"></script>
 
-  <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyDzECJCuDiZQTodR-sN_GIdP_pEZsz-fJc",
-      authDomain: "readergate-2a856.firebaseapp.com",
-      databaseURL: "https://readergate-2a856.firebaseio.com",
-      storageBucket: "readergate-2a856.appspot.com",
-    };
-    firebase.initializeApp(config);
-  </script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDzECJCuDiZQTodR-sN_GIdP_pEZsz-fJc"
+            , authDomain: "readergate-2a856.firebaseapp.com"
+            , databaseURL: "https://readergate-2a856.firebaseio.com"
+            , storageBucket: "readergate-2a856.appspot.com"
+        , };
+        firebase.initializeApp(config);
+    </script>
 
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
 
-  <!-- Angular Material Library -->
-  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+    <!-- Angular Material Library -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
 
-  <div ng-view></div>
+    <!-- Headroom Library -->
+    <script src="./libs/headroom.js"></script>
+    <script src="./libs/angular.headroom.js"></script>
 
-  <footer-bar></footer-bar>
+    <div ng-view></div>
 
-  <!-- build:js(src) scripts/vendor.js -->
-  <!-- bower:js -->
-  <!-- run `gulp inject` to automatically populate bower script dependencies -->
-  <!-- endbower -->
-  <!-- endbuild -->
+    <footer-bar></footer-bar>
 
-  <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
-  <!-- inject:js -->
-  <!-- js files will be automatically insert here -->
-  <!-- endinject -->
+    <!-- build:js(src) scripts/vendor.js -->
+    <!-- bower:js -->
+    <!-- run `gulp inject` to automatically populate bower script dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
 
-  <!-- inject:partials -->
-  <!-- angular templates will be automatically converted in js and inserted here -->
-  <!-- endinject -->
-  <!-- endbuild -->
+    <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
+    <!-- inject:js -->
+    <!-- js files will be automatically insert here -->
+    <!-- endinject -->
+
+    <!-- inject:partials -->
+    <!-- angular templates will be automatically converted in js and inserted here -->
+    <!-- endinject -->
+    <!-- endbuild -->
 
 </body>
 

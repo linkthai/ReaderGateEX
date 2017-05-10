@@ -1,39 +1,117 @@
 <div layout="vertical" layout-fill>
 
-  <md-content flex class=body>
-    <header>
-      <nav-bar md-whiteframe-z2></nav-bar>
-    </header>
+    <md-content flex class=body>
 
-    <md-content class="mid-content" data-ng-controller="ChapterController as vm">
-      <div class="main-content">
-        <div class="length" layout="column" layout-align="space-between center">
-          <div class="chapter-navbar" layout="row" layout-align="space-around center">
-            <div ng-show="vm.isFirst" class="chapter-icon"></div>
-            <div ng-show="!vm.isFirst" class="chapter-icon previous-icon" ng-click="vm.goPrev()"></div>
-            <select ng-change="vm.go(vm.selectedChapter.data._chapterId, vm.selectedChapter.name)" ng-model="vm.selectedChapter" class="chapter-select" ng-options="item.name for item in vm.chapList">
-            </select>
-            <div ng-show="vm.isLast" class="chapter-icon"></div>
-            <div ng-show="!vm.isLast" class="chapter-icon next-icon" ng-click="vm.goNext()"></div>
-          </div>
+        <md-content class="mid-content" data-ng-controller="ChapterController as vm">
+            <headroom>
+                <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#/">ReaderGate</a>
+                        </div>
 
-          <div class="chapter-pages">
-            <div flex ng-repeat="page in chapPages">
-              <img class="chapter-page" src={{page}}/>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav" id="allPagesNav">
+                                <li class="active"><a ng-click="vm.backToSeries()">{{vm.title}}</a></li>
+                                <li class="divider"></li>
+
+                                <li class="dropdown " id="layoutDropdown1">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{vm.layout}} <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a ng-click="vm.onePageLayout()">One page</a></li>
+                                        <li><a ng-click="vm.allPagesLayout()">All pages</a></li>
+                                    </ul>
+                                </li>
+                                
+                                <li><a class="hover-disable">Chapter: </a></li>
+                                <li>
+                                    <select class="form-control chapter-dropbox" ng-change="vm.go(vm.selectedChapter.data._chapterId, vm.selectedChapter.name)" ng-model="vm.selectedChapter" class="chapter-select" ng-options="item.name for item in vm.chapList">
+                                    </select>
+                                </li>
+                                <li>
+                                    <ul class="pager">
+                                        <li class="previous" id="previousButton"><a ng-click="vm.goPrev()">&larr;</a></li>
+                                        <li class="next" id="nextButton"><a ng-click="vm.goNext()">&rarr;</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <ul class="nav navbar-nav hide-content" id="onePageNav">
+                                <li class="active"><a ng-click="vm.backToSeries()">{{vm.title}}</a></li>
+                                <li class="divider"></li>
+
+                                <li class="dropdown " id="layoutDropdown2">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{vm.layout}} <span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a ng-click="vm.onePageLayout()">One page</a></li>
+                                        <li><a ng-click="vm.allPagesLayout()">All pages</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <select class="form-control chapter-dropbox" ng-change="vm.go(vm.selectedChapter.data._chapterId, vm.selectedChapter.name)" ng-model="vm.selectedChapter" class="chapter-select" ng-options="item.name for item in vm.chapList">
+                                    </select>
+                                </li>
+                                <li><a class="hover-disable">Page: </a></li>
+                                <li>
+                                    <select class="form-control chapter-dropbox" ng-change="vm.toPage(vm.selectedPage.value)" ng-model="vm.selectedPage" class="chapter-select" ng-options="item.value for item in vm.pageList">
+                                    </select>
+                                </li>
+                                <li>
+                                    <ul class="pager">
+                                        <li class="previous" id="previousButton"><a ng-click="vm.goPrev()">&larr;</a></li>
+                                        <li class="next" id="nextButton"><a ng-click="vm.goNext()">&rarr;</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </headroom>
+            <div class="main-content">
+                <div class="length" layout="column" layout-align="space-between center">
+
+                    <!--
+                    <div class="chapter-navbar" layout="row" layout-align="space-around center">
+                        <div ng-show="vm.isFirst" class="chapter-icon"></div>
+                        <div ng-show="!vm.isFirst" class="chapter-icon previous-icon" ng-click="vm.goPrev()"></div>
+                        <select ng-change="vm.go(vm.selectedChapter.data._chapterId, vm.selectedChapter.name)" ng-model="vm.selectedChapter" class="chapter-select" ng-options="item.name for item in vm.chapList">
+                        </select>
+                        <div ng-show="vm.isLast" class="chapter-icon"></div>
+                        <div ng-show="!vm.isLast" class="chapter-icon next-icon" ng-click="vm.goNext()"></div>
+                    </div>
+-->
+
+
+                    <div class="chapter-pages" id="allPagesImg">
+                        <div flex ng-repeat="page in chapPages">
+                            <img class="chapter-page" src={{page}}/>
+                        </div>
+                    </div>
+
+                    <div class="chapter-pages hide-content" id="onePageImg">
+                        <img class="chapter-page" src={{vm.currentPage}} ng-click="vm.goNext()"/>
+                    </div>
+
+                    <!--
+                    <div class="chapter-navbar" layout="row" layout-align="space-around center">
+                        <div ng-show="vm.isFirst" class="chapter-icon"></div>
+                        <div ng-show="!vm.isFirst" class="chapter-icon previous-icon" ng-click="vm.goPrev()"></div>
+                        <select ng-change="vm.go(vm.selectedChapter.data._chapterId, vm.selectedChapter.name)" ng-model="vm.selectedChapter" class="chapter-select" ng-options="item.name for item in vm.chapList">
+                        </select>
+                        <div ng-show="vm.isLast" class="chapter-icon"></div>
+                        <div class="chapter-icon next-icon" ng-click="vm.goNext()"></div>
+                    </div>
+-->
+                </div>
             </div>
-          </div>
+        </md-content>
 
-          <div class="chapter-navbar" layout="row" layout-align="space-around center">
-            <div ng-show="vm.isFirst" class="chapter-icon"></div>
-            <div ng-show="!vm.isFirst" class="chapter-icon previous-icon" ng-click="vm.goPrev()"></div>
-            <select ng-change="vm.go(vm.selectedChapter.data._chapterId, vm.selectedChapter.name)" ng-model="vm.selectedChapter" class="chapter-select" ng-options="item.name for item in vm.chapList">
-            </select>
-            <div ng-show="vm.isLast" class="chapter-icon"></div>
-            <div class="chapter-icon next-icon" ng-click="vm.goNext()"></div>
-          </div>
-        </div>
-      </div>
     </md-content>
-  </md-content>
 
 </div>
