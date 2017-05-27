@@ -1,0 +1,254 @@
+<div layout="vertical" layout-fill>
+
+  <md-content flex class=body>
+    <header md-whiteframe-z2 md-raised>
+      <nav-bar></nav-bar>
+    </header>
+
+<div class="container-fluid">
+<md-content class="mid-content" data-ng-controller="MainSubController as vm">
+
+<div class="header-text" ng-click="vm.goToSortArchive(2, '/archive')" style="background-color: #444; margin-bottom:12px; margin-top: -12px; color: #24e59e;">
+              <md-icon class="main-icon-aligned fab-icon-spin"><i class="material-icons md-36" style="color: #24e59e;">new_releases</i></md-icon>
+              NEW RELEASE
+              <md-icon class="main-icon-aligned right-bar-icon"><i class="cyan material-icons md-36" style="color: #24e59e;">navigate_next</i></md-icon>
+            </div>
+            
+            
+    <div id="custom_carousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" style="height: 420px; background-color: white;">
+          
+          <div class="item active"  ng-click="vm.goToTitleNewRelease(0)">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3"><img src="{{vm.newRelease[0].cover}}" class="img-responsive aspect-ratio"></div>
+                        <div class="col-md-9">
+                            <h2>{{vm.newRelease[0].title}}</h2>
+							<h3>{{vm.newRelease[0].author}}</h3>
+                            <p>{{vm.newRelease[0].desc}}</p>
+						</div>
+                    </div>
+                </div>            
+            </div> 
+           
+            <div class="item" ng-repeat="item in vm.newRelease"  ng-if="$index > 0"  ng-click="vm.goToTitleNewRelease($index)">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3"><img src="{{item.cover}}" class="img-responsive aspect-ratio"></div>
+                        <div class="col-md-9">
+                            <h2>{{item.title}}</h2>
+							<h3>{{item.author}}</h3>
+                            <p>{{item.desc}}</p>
+						</div>
+                    </div>
+                </div>            
+            </div> 
+        <!-- End Item -->
+        </div>
+        <!-- End Carousel Inner -->
+
+        <div class="controls">
+            <ul class="nav">
+                <li data-target="#custom_carousel" data-slide-to="0" class="active"><a href=""><img class="slide-image aspect-ratio" src="{{vm.newRelease[0].cover}}"></a></li>
+                <li ng-repeat="item in vm.newRelease"  ng-if="$index > 0" data-target="#custom_carousel" data-slide-to="{{$index}}"><a href=""><img class="slide-image aspect-ratio" src="{{item.cover}}"></a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+      $( document ).ready(function() {
+    $('#custom_carousel').on('slide.bs.carousel', function (evt) {
+         
+      $('#custom_carousel .controls li.active').removeClass('active');
+      $('#custom_carousel .controls li:eq('+$(evt.relatedTarget).index()+')').addClass('active');
+    });
+});
+         
+     
+     </script>
+    <!-- End Carousel -->
+    
+    
+	<md-divider class=""></md-divider>
+	<div class="main-content" layout-gt-sm="row" layout="column" flex=100>		
+			
+		<div class="list-section" flex=80>
+			<ul class="nav nav-tabs" flex=100>
+				<li class="active"><a href="#latest-update" data-toggle="tab" aria-expanded="true">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Latest updates &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a></li>
+				<li class=""><a href="#most-viewed" data-toggle="tab" aria-expanded="false">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Most viewed &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a></li>
+				<li class=""><a href="#most-popular" data-toggle="tab" aria-expanded="false">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Most popular &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a></li>
+
+			</ul>
+			<div id="myTabContent" class="tab-content">
+				<div class="tab-pane fade active in" id="latest-update">
+				<md-card class="right-bar" flex=100>
+					<md-card-content>
+						<div class="right-bar-text" ng-repeat-start="item in vm.latestUpdate" ng-click="vm.go(item._title, item._bookId, item._chapterId, item._chapterName)">
+							
+							<div class="right-bar-name">
+								<md-icon class="right-bar-icon icon-aligned"><i class="red material-icons md-12">keyboard_arrow_right</i></md-icon>
+								{{ item._title }}
+							</div>
+							<div layout="row" class="right-bar-chapter">
+								<div><img src="assets/demo/blade icon.jpg" style="margin-right:10px;"></div>
+								<div><h4>{{ item._chapterName }}</h4>
+									<h5>Author: Hiroaki Samura</h5>
+									<h5>Genre: Action</h5></div>
+							</div>
+						</div>
+						<md-divider ng-repeat-end></md-divider>
+					</md-card-content>
+				</md-card>
+				</div>
+				<div class="tab-pane fade" id="most-viewed">
+					<p> Tab content </p>
+				</div>
+				<div class="tab-pane fade" id="most-popular">
+					<p> Tab content </p>
+				</div>
+			</div>
+		
+		</div>
+		
+		<div class="main-content" layout-gt-sm="column" layout="column" flex=30>
+               
+				<md-button style="padding: 15px; background-color: #00bc8c;">
+                        <div style="margin: auto; margin-top: 15px;">
+                         <img style="width: 60px; margin-top: -15px;" src="assets/images/community.png" /> 
+						<span class="bold" style="font-size:40px; margin-left: 20px; color: white; margin-top: 20px;" >Forum
+					</span></div>
+				</md-button>
+				
+				<md-card class="right-bar" style="margin-top: 15px; padding: 15px;">
+					<div flex=100 layout="column">
+						<div><span class="bold" style="color:#555555;">Browse by Genres</span></div>
+						<div layout="row" style="padding-top: 5px; padding-bottom:5px;">
+							<ul flex=45 layout="column">
+								<li><span class="browse-text">All</span></li>
+								<li><span class="browse-text">Comedy</span></li>
+								<li><span class="browse-text">Romance</span></li>
+								<li><span class="browse-text">Horror</span></li>
+							</ul>
+							<ul flex=55 layout="column">
+								<li><span class="browse-text">Action</span></li>
+								<li><span class="browse-text">Fantasy</spana></li>
+								<li><span class="browse-text">Drama</span></li>
+								<li><span class="browse-text">Adventure</span></li>
+							</ul>
+						</div>
+						
+						<md-divider class="mid-content bg-cyan" style="margin-bottom: 10px; width: 95%;"></md-divider>
+					
+						  <div><span class="bold" style="color:#555555;">Browse by Status</span></div>
+						  <div layout="row" style="padding-top: 5px; padding-bottom:5px;">
+							<ul flex=45 layout="column">
+								<li><span class="browse-text">All</span></li>
+								<li><span class="browse-text">On going</span></li>
+							</ul>
+							<ul flex=55 layout="column">
+								<li><span class="browse-text">New</span></li>
+								<li><span class="browse-text">Completed</span></li>
+							</ul>
+						</div>
+						
+						
+						<md-divider class="mid-content bg-cyan" style="margin-bottom: 10px; width: 95%;"></md-divider>
+						
+						<div><span class="bold" style="color:#555555;">Browse by Alphabetic</span></div>
+						 <md-content flex-gt-sm=80 class="alphabet-container-right" layout-align="center center">
+            <button class="alphabet-button-right" ng-repeat="char in vm.alphabet" ng-click="vm.changeAlphabet(char)" ng-class="{'alphabet-button-active': vm.selectedAlphabet === char}">
+              {{ char }}
+            </button>
+          </md-content>
+					</div>
+				</md-card>
+
+			</div>
+		</div>
+	</div>
+</md-content>
+</div>
+</div>
+
+
+    <!--
+	<md-content class="mid-content" data-ng-controller="MainController as vm">
+      <div class="main-content" layout-gt-sm="row" layout="column">
+        <div class="list-section" flex=100>
+          <md-content>
+            <div class="header-text" ng-click="vm.goToSortArchive(2, '/archive')">
+              <md-icon class="main-icon-aligned fab-icon-spin"><i class="cyan material-icons md-36">new_releases</i></md-icon>
+              NEW RELEASE
+              <md-icon class="main-icon-aligned right-bar-icon"><i class="cyan material-icons md-36">navigate_next</i></md-icon>
+            </div>
+            <md-content class="list-comcard" layout-wrap layout-gt-md="row" layout="column" layout-align="start center">
+              <div flex-gt-md=50 layout-gt-xs="row" layout="column" layout-fill>
+                <div class="com-card-wrapper" flex layout-fill>
+                  <com-card layout-fill ng-click="vm.goToTitleNewRelease(3)" book-genres="{{vm.newRelease[3].genres}}" book-author="{{vm.newRelease[3].author}}" book-title="{{vm.newRelease[3].title}}" book-cover="{{vm.newRelease[3].cover}}"></com-card>
+                </div>
+                <div class="com-card-wrapper" flex layout-fill>
+                  <com-card layout-fill ng-click="vm.goToTitleNewRelease(2)" book-title="{{vm.newRelease[2].title}}" book-cover="{{vm.newRelease[2].cover}}" book-genres="{{vm.newRelease[2].genres}}" book-author="{{vm.newRelease[2].author}}"></com-card>
+                </div>
+              </div>
+              <div flex-gt-md=50 layout-gt-xs="row" layout="column">
+                <div flex layout-fill>
+                  <com-card ng-click="vm.goToTitleNewRelease(1)" book-title="{{vm.newRelease[1].title}}" book-cover="{{vm.newRelease[1].cover}}" book-genres="{{vm.newRelease[1].genres}}" book-author="{{vm.newRelease[1].author}}"></com-card>
+                </div>
+                <div flex layout-fill>
+                  <com-card ng-click="vm.goToTitleNewRelease(0)" book-title="{{vm.newRelease[0].title}}" book-cover="{{vm.newRelease[0].cover}}" book-genres="{{vm.newRelease[0].genres}}" book-author="{{vm.newRelease[0].author}}"></com-card>
+                </div>
+              </div>
+            </md-content>
+          </md-content>
+
+          <md-divider class="margin"></md-divider>
+		
+          <md-content>
+            <div class="header-text" ng-click="vm.goToSortArchive(2, '/archive')">
+              <md-icon class="main-icon-aligned fab-icon-spin"><i class="cyan material-icons md-36">star</i></md-icon>
+              MOST POPULAR
+              <md-icon class="main-icon-aligned right-bar-icon"><i class="cyan material-icons md-36">navigate_next</i></md-icon>
+            </div>
+            <md-content class="list-comcard" layout-wrap layout-gt-md="row" layout="column" layout-align="start center">
+              <div flex-gt-md=50 layout-gt-xs="row" layout="column">
+                <div flex layout-fill>
+                  <com-card ng-click="vm.goToTitleMostPopular(3)" book-genres="{{vm.mostPopular[3].genres}}" book-author="{{vm.mostPopular[3].author}}" book-title="{{vm.mostPopular[3].title}}" book-cover="{{vm.mostPopular[3].cover}}"></com-card>
+                </div>
+                <div flex layout-fill>
+                  <com-card ng-click="vm.goToTitleMostPopular(2)" book-title="{{vm.mostPopular[2].title}}" book-cover="{{vm.mostPopular[2].cover}}" book-genres="{{vm.mostPopular[2].genres}}" book-author="{{vm.mostPopular[2].author}}"></com-card>
+                </div>
+              </div>
+              <div flex-gt-md=50 layout-gt-xs="row" layout="column">
+                <div flex layout-fill>
+                  <com-card ng-click="vm.goToTitleMostPopular(1)" book-title="{{vm.mostPopular[1].title}}" book-cover="{{vm.mostPopular[1].cover}}" book-genres="{{vm.mostPopular[1].genres}}" book-author="{{vm.mostPopular[1].author}}"></com-card>
+                </div>
+                <div flex layout-fill>
+                  <com-card ng-click="vm.goToTitleMostPopular(0)" book-title="{{vm.mostPopular[0].title}}" book-cover="{{vm.mostPopular[0].cover}}" book-genres="{{vm.mostPopular[0].genres}}" book-author="{{vm.mostPopular[0].author}}"></com-card>
+                </div>
+              </div>
+            </md-content>
+          </md-content>
+        </div>
+        <md-card class="right-bar" flex-gt-sm=30 flex=100>
+	
+          <md-card-header class="right-bar-header">
+            Latest Update
+          </md-card-header>
+          <md-card-content>
+            <div class="right-bar-text" ng-repeat-start="item in vm.latestUpdate" ng-click="vm.go(item._bookId, item._chapterId, item._chapterName)">
+              <div class="right-bar-name">
+                <md-icon class="right-bar-icon icon-aligned"><i class="red material-icons md-12">keyboard_arrow_right</i></md-icon>
+                {{ item._title }}
+              </div>
+              <div class="right-bar-chapter">
+                {{ item._chapterName }}
+              </div>
+            </div>
+            <md-divider ng-repeat-end></md-divider>
+          </md-card-content>
+        </md-card>
+      </div>
+    </md-content>
+  </md-content>
+-->

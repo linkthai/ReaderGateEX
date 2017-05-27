@@ -1,0 +1,97 @@
+<div layout="vertical" layout-fill>
+
+  <md-content flex class=body>
+    <header>
+      <nav-bar md-whiteframe-z2></nav-bar>
+    </header>
+
+    <md-content class="mid-content length" data-ng-controller="PaymentController as vm" style="background-color:white">
+      <div class="main-content" layout="column" layout-align="space-around stretch">
+
+        <div class="sort-bar" layout="column" layout-gt-sm="row" layout-align="center center">
+          <button class="sort-button" flex=100 flex-gt-sm data-ng-click="vm.changeType($index)" data-ng-class="{'sort-button-on': selectedSortIndex === $index}" flex data-ng-repeat="item in vm.sortType">
+            {{ item.type }}
+          </button>
+        </div>
+
+        <div layout="column" ng-hide="selectedSortIndex != 0">
+          <md-content flex-gt-sm=80 class="alphabet-container" layout-align="center center">
+            <button class="alphabet-button" ng-repeat="char in vm.alphabet" ng-click="vm.changeAlphabet(char)" ng-class="{'alphabet-button-active': vm.selectedAlphabet === char}">
+              {{ char }}
+            </button>
+          </md-content>
+          <md-divider class="mid-content bg-cyan"></md-divider>
+
+          <md-content class="mid-content table-header" layout="row" layout="start center"  style="background-color:white">
+            <div flex=50 flex-xs=100 flex-sm=100>Title</div>
+            <div flex=40 hide-xs hide-sm>Author</div>
+            <div flex=10 hide-xs hide-sm>Status</div>
+          </md-content>
+          <md-content class="mid-content table-wrapper" layout="column" layout="stretch center" style="background-color:white">
+            <div class="table-list bottom-border-animation" ng-repeat="item in vm.comicList | orderBy:'title' | filter: vm.filterAlphabet" layout="row" layout="start center" ng-click="vm.go(item.data)">
+              <div flex=50 flex-xs=100 flex-sm=100>{{item.title}}</div>
+              <div flex=40 hide-xs hide-sm>{{item.author}}</div>
+              <div flex=10 hide-xs hide-sm>{{item.status}}</div>
+            </div>
+          </md-content>
+        </div>
+
+        <div layout="column" ng-hide="selectedSortIndex != 1">
+          <md-content class="alphabet-container longtext-container" layout="column" layout-gt-xs="row" layout-align="space-around center">
+            <button class="alphabet-button longtext-button" ng-repeat="item in vm.popularCategory" ng-click="vm.changePopularCategory(item.name)" ng-class="{'alphabet-button-active': vm.selectedPopularCategory === item.name}">
+              {{ item.name }}
+            </button>
+          </md-content>
+          <md-divider class="mid-content bg-cyan"></md-divider>
+
+          <md-content class="mid-content table-header" layout="row" layout="start center" style="background-color:white">
+            <div flex=50 flex-xs=100 flex-sm=100>Title</div>
+            <div flex=40 hide-xs hide-sm>Author</div>
+            <div flex=10 hide-xs hide-sm>Views</div>
+          </md-content>
+          <md-content class="mid-content table-wrapper" layout="column" layout="stretch center" style="background-color:white">
+            <div class="table-list bottom-border-animation" ng-repeat="item in vm.comicList | orderBy: vm.popularReverse" layout="row" layout="start center" ng-click="vm.go(item.data)">
+              <div flex=50 flex-xs=100 flex-sm=100>{{item.title}}</div>
+              <div flex=40 hide-xs hide-sm>{{item.author}}</div>
+              <div flex=10 hide-xs hide-sm>{{item.views}}</div>
+            </div>
+          </md-content>
+        </div>
+
+
+        <div layout="column" ng-hide="selectedSortIndex != 2">
+          <md-content class="alphabet-container longtext-container" layout="column" layout-gt-xs="row" layout-align="space-around center">
+            <button class="alphabet-button longtext-button" ng-repeat="item in vm.newestCategory" ng-click="vm.changeNewestCategory(item.name)" ng-class="{'alphabet-button-active': vm.selectedNewestCategory === item.name}">
+              {{ item.name }}
+            </button>
+          </md-content>
+          <md-divider class="mid-content bg-cyan"></md-divider>
+
+          <md-content class="mid-content table-header" layout="row" layout="start center" style="background-color:white">
+            <div flex=50 flex-xs=100 flex-sm=100>Title</div>
+            <div flex=40 hide-xs hide-sm>Author</div>
+            <div flex=10 hide-xs hide-sm>Status</div>
+          </md-content>
+          <md-content class="mid-content table-wrapper" layout="column" layout="stretch center" style="background-color:white">
+            <div class="table-list bottom-border-animation" ng-repeat="item in vm.comicList | orderBy: vm.reverse" layout="row" layout="start center" ng-click="vm.go(item.data)">
+              <div flex=50 flex-xs=100 flex-sm=100>{{item.title}}</div>
+              <div flex=40 hide-xs hide-sm>{{item.author}}</div>
+              <div flex=10 hide-xs hide-sm>{{item.status}}</div>
+            </div>
+          </md-content>
+
+        </div>
+
+        <md-button class="md-fab md-fab-bottom-right md-accent fixed-fab" ng-show="vm.adminPermission" ng-click="vm.addSeries()">
+              <md-icon><i class="material-icons md-24 fab-icon-spin">library_add</i>
+              </md-icon>
+              <md-tooltip md-direction="left">
+                   Add new series
+              </md-tooltip>
+         </md-button>
+
+      </div>
+    </md-content>
+  </md-content>
+
+</div>

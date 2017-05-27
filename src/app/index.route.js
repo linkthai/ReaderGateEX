@@ -77,6 +77,21 @@
         controller: 'SearchController',
         controllerAs: 'vm'
       })
+      .when('/main_sub', {
+        templateUrl: 'app/main_sub/main_sub.html',
+        controller: 'MainSubController',
+        controllerAs: 'vm'
+      })
+      .when('/subscription', {
+        templateUrl: 'app/subscription/subscription.html',
+        controller: 'SubscriptionController',
+        controllerAs: 'vm'
+      })
+      .when('/payment', {
+        templateUrl: 'app/payment/payment.html',
+        controller: 'PaymentController',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/'
       });

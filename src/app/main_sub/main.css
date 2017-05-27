@@ -1,0 +1,95 @@
+#latest-update {
+      padding: 0px;
+     margin:0px;
+}
+#custom_carousel {
+      paddding-top: 50px;
+     padding-bottom: 20px;
+}
+#custom_carousel .item {
+ 
+    color:#000;
+    background-color:white;
+    padding: 20px 20px;
+}
+#custom_carousel .controls{
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding:0;
+    margin:0;
+    white-space: nowrap;
+    text-align: center;
+    position: relative;
+    background:#ddd
+}
+#custom_carousel .controls li {
+    display: table-cell;
+    width: 1%;
+    max-width:90px
+}
+#custom_carousel .controls li:hover {
+    background-color: var(--primary-color-3);
+}
+
+#custom_carousel .controls li a:hover {
+    background-color: var(--primary-color-3);
+}
+#custom_carousel .controls li.active {
+    background-color:#eee;
+    border-top:5px solid var(--primary-color);
+}
+#custom_carousel .controls li.active:hover {
+    background-color: var(--primary-color-2);
+}
+#custom_carousel .controls li.active a:hover {
+    background-color: var(--primary-color-2);
+}
+#custom_carousel .controls a small {
+    overflow:hidden;
+    display:block;
+    font-size:10px;
+    margin-top:5px;
+    font-weight:bold
+}
+.header-text {
+      padding-left: 40px;
+      padding-top: 20px;
+     height: 50px;
+     background-color:#eee;
+     color: #00bc8c;
+}
+.browse-text {
+     font-size: 15px;
+     color: var(--primary-color);
+}
+
+.browse-text:hover {
+     cursor:pointer;
+     cursor: hand;
+     color: var(--secondary-color);
+}
+.alphabet-container-right {
+     width: 100%;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.alphabet-button-right {
+  color: var(--primary-color);
+  font-size: 18px;
+  margin: 0px;
+  background-color: transparent;
+  border: none;
+  min-width: 50px;
+  height: 40px;
+  outline-style: none;
+}
+.alphabet-button-right:hover {
+  color: var(--secondary-color);
+}
+.right-bar-text {
+     margin-left: 5px;    
+}
+.slide-image {
+      width:120px; 
+}
